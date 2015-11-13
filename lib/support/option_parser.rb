@@ -1,5 +1,7 @@
 module RamlPoliglota
-  module OptionParser
+  module Support
+
+    include RamlPoliglota::Model
 
     def command_line_options
       command = Execution.new
