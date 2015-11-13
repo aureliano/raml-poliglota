@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require File.expand_path '../../lib/raml_poliglota.rb', __FILE__
+
+include RamlPoliglota::Support
+
+command = command_line_options
+
+app = RamlPoliglota::RamlPoliglota.new do |lib|
+  lib.execution = command
+end
