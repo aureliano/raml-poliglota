@@ -47,7 +47,7 @@ module RamlPoliglota
         mandatory = [:output, :language]
         missing = mandatory.select{ |param| command.send(param).nil? }
         unless missing.empty?
-          puts "Missing option: #{missing}"
+          puts " * Missing option: #{missing}\n\n"
           puts opts
           exit
         end
