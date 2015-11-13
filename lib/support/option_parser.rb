@@ -8,12 +8,12 @@ module RamlPoliglota
 
       opts = OptionParser.new do |opts|
         opts.banner = "RamlPoliglota: an utility for generating multi-language client applications to consume REST services."
-        opts.define_head "Usage: raml_poliglota [path] [options]"
+        opts.define_head "Usage: raml-poliglota [path] [options]"
         opts.separator ""
         opts.separator "Examples:"
-        opts.separator " raml_poliglota /path/to/raml/file.raml"
-        opts.separator " raml_poliglota /path/to/raml/file.raml -o /path/to/save/generated/sources"
-        opts.separator " raml_poliglota /path/to/raml/file.raml -o /path/to/save/generated/sources -l java"
+        opts.separator " raml-poliglota /path/to/raml/file.raml"
+        opts.separator " raml-poliglota /path/to/raml/file.raml -o /path/to/save/generated/sources"
+        opts.separator " raml-poliglota /path/to/raml/file.raml -o /path/to/save/generated/sources -l java"
         opts.separator ""
         opts.separator "Options:"
 
@@ -26,7 +26,7 @@ module RamlPoliglota
         end
 
         opts.on_tail("-s", "--sources", "Show supported programming languages generation.") do
-          puts "raml_poliglota #{RamlPoliglota::SUPPORTED_PROGRAMMING_LANGUAGES}"
+          puts "Supported programming languages: #{SUPPORTED_PROGRAMMING_LANGUAGES.join ', '}"
           exit
         end
 
@@ -36,13 +36,21 @@ module RamlPoliglota
         end
 
         opts.on_tail("-v", "--version", "Show version.") do
-          puts "raml_poliglota #{RamlPoliglota::VERSION}"
+          puts "raml-poliglota #{RELEASE_VERSION}"
           exit
         end
       end
       
       begin
         opts.parse!
+
+        mandatory = [:output, :language]
+        missing = mandatory.select{ |param| command.send(param).nil? }
+        unless missing.empty?
+          puts "Missing option: #{missing}"
+          puts opts
+          exit
+        end
         
         raml_path = ARGV.pop
         command.raml_path = raml_path
