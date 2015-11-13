@@ -23,7 +23,6 @@ module RamlPoliglota
         found = @ignorable_source_files.select {|file| source_file.end_with? file }
         return unless found.empty?
 
-        puts "Requiring source file #{source_file}"
         require source_file
       end
     end
