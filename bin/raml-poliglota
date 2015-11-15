@@ -9,3 +9,5 @@ command = command_line_options
 app = RamlPoliglota::RamlPoliglota.new do |lib|
   lib.execution = command
 end
+
+app.execute
