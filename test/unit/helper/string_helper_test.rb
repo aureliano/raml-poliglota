@@ -17,6 +17,7 @@ class StringHelperTest < Test::Unit::TestCase
 
   def test_to_camel_case
     assert_equal 'ToCamelCase', StringHelper.to_camel_case('to_camel_case')
+    assert_equal 'ToCamelCase', StringHelper.to_camel_case('ToCamelCase')
     assert_equal 'ToCamelCase', StringHelper.to_camel_case('_to_camel_case_')
     assert_equal 'Camel', StringHelper.to_camel_case('camel')
     assert_equal '', StringHelper.to_camel_case('')

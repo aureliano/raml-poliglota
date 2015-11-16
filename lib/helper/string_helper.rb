@@ -12,7 +12,12 @@ module RamlPoliglota
       end
 
       def self.to_camel_case(value)
-        value.split("_").each { |s| s.capitalize! }.join("")
+        text = value.split '_'
+        if text.size == 1
+          return ((/^[a-z]/.match(value)) ? value.capitalize : value)
+        end
+
+        text.each { |s| s.capitalize! }.join("")
       end
 
       def self.to_snake_case(value)
