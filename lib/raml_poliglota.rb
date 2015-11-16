@@ -24,6 +24,8 @@ module RamlPoliglota
 
       _apply_validations
 
+      raml = RamlParser::Parser.parse_file(@execution.raml_path)
+
       @logger.info "#{@execution.language} source-code generated to #{@execution.output}"
     end
 
