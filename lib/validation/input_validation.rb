@@ -3,6 +3,8 @@ module RamlPoliglota
     
     class InputValidation
 
+      include RamlPoliglota::Helper
+
       def self.validate_inputs(execution)
         message = _validate_raml_path execution.raml_path
         return message unless message.nil?
@@ -22,6 +24,7 @@ module RamlPoliglota
 
       def self._validate_language(language)
         return "Programming Language must not be empty." if StringHelper.empty? language
+        include RamlPoliglota::Support
 
         found = SUPPORTED_PROGRAMMING_LANGUAGES.select { |supported| supported.downcase == language.downcase }
         return "#{language} is not a supported programming language." if found.empty?
