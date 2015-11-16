@@ -23,7 +23,11 @@ module RamlPoliglota
       @logger.info "Target output: #{@execution.output}"
 
       message = InputValidation.validate_inputs @execution
-      raise message unless message.nil?
+      unless message.nil?
+        puts
+        @logger.error message
+        exit 100
+      end
 
       @logger.info "#{@execution.language} source-code generated to #{@execution.output}"
     end
