@@ -24,7 +24,7 @@ module RamlPoliglota
 
       def self._validate_language(language)
         return "Programming Language must not be empty." if StringHelper.empty? language
-        include RamlPoliglota::Support
+        include Support
 
         found = SUPPORTED_PROGRAMMING_LANGUAGES.select { |supported| supported.downcase == language.downcase }
         return "#{language} is not a supported programming language." if found.empty?

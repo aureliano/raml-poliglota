@@ -3,7 +3,7 @@ require File.expand_path '../support/requires.rb', __FILE__
 RamlPoliglota::Support::SourceLoader.new.load_project_source_files
 
 include RamlPoliglota::Configuration
-include RamlPoliglota::Helper
+include RamlPoliglota::Validation
 
 module RamlPoliglota
 
@@ -23,12 +23,12 @@ module RamlPoliglota
       @logger.info "Target output: #{@execution.output}"
 
       _apply_validations
-
-      raml = RamlParser::Parser.parse_file(@execution.raml_path)
+      raml = _parse_raml
 
       @logger.info "#{@execution.language} source-code generated to #{@execution.output}"
     end
 
+    private
     def _apply_validations
       message = InputValidation.validate_inputs @execution
       unless message.nil?
@@ -37,5 +37,16 @@ module RamlPoliglota
         exit 100
       end
     end
+
+    def _parse_raml
+      begin
+        RamlParser::Parser.parse_file(@execution.raml_path)
+      rescue Exception => ex
+        puts
+        @logger.error ex.message
+        exit 101
+      end
+    end
+
   end
 end
