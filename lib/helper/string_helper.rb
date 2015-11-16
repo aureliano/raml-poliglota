@@ -18,7 +18,7 @@ module RamlPoliglota
       def self.to_snake_case(value)
         text = value.dup
         value.scan(/[A-Z]/).each { |v| text.sub! v, "_#{v.downcase}" }
-        text.sub(/^_/, '').sub(/_{2,}/, '_').sub(/^_/, '').sub /_$/, ''
+        text.sub(/^_/, '').sub(/_{2,}/, '_').sub(/^_/, '').sub(/_$/, '').downcase
       end
 
     end
