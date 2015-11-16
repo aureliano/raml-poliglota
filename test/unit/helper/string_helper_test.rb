@@ -17,8 +17,17 @@ class StringHelperTest < Test::Unit::TestCase
 
   def test_to_camel_case
     assert_equal 'ToCamelCase', StringHelper.to_camel_case('to_camel_case')
+    assert_equal 'ToCamelCase', StringHelper.to_camel_case('_to_camel_case_')
     assert_equal 'Camel', StringHelper.to_camel_case('camel')
     assert_equal '', StringHelper.to_camel_case('')
+  end
+
+  def test_to_snake_case
+    assert_equal 'to_camel_case', StringHelper.to_snake_case('ToCamelCase')
+    assert_equal 'to_camel_case', StringHelper.to_snake_case('ToCamel_Case')
+    assert_equal 'to_camel_case', StringHelper.to_snake_case('_ToCamel_case_')
+    assert_equal 'camel', StringHelper.to_snake_case('Camel')
+    assert_equal '', StringHelper.to_snake_case('')
   end
   
 end
