@@ -3,6 +3,7 @@ require File.expand_path '../support/requires.rb', __FILE__
 RamlPoliglota::Support::SourceLoader.new.load_project_source_files
 
 include RamlPoliglota::Configuration
+include RamlPoliglota::Helper
 
 module RamlPoliglota
 
@@ -21,6 +22,8 @@ module RamlPoliglota
       @logger.info "Target generation language: #{@execution.language}"
       @logger.info "Target output: #{@execution.output}"
 
+      message = InputValidation.validate_inputs @execution
+      raise message unless message.nil?
 
       @logger.info "#{@execution.language} source-code generated to #{@execution.output}"
     end
