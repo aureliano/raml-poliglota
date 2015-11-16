@@ -11,6 +11,10 @@ module RamlPoliglota
         (value.nil? || value.empty?)
       end
 
+      def self.to_camel_case(value)
+        value.split("_").each { |s| s.capitalize! }.join("")
+      end
+
     end
   end
 end

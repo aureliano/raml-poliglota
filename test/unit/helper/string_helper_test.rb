@@ -14,5 +14,11 @@ class StringHelperTest < Test::Unit::TestCase
     assert_false(StringHelper.empty? '123')
     assert_false(StringHelper.empty? 'abc')
   end
+
+  def test_to_camel_case
+    assert_equal 'ToCamelCase', StringHelper.to_camel_case('to_camel_case')
+    assert_equal 'Camel', StringHelper.to_camel_case('camel')
+    assert_equal '', StringHelper.to_camel_case('')
+  end
   
 end
