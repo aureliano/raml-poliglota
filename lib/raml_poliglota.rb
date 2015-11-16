@@ -22,14 +22,18 @@ module RamlPoliglota
       @logger.info "Target generation language: #{@execution.language}"
       @logger.info "Target output: #{@execution.output}"
 
+      _apply_validations
+
+      @logger.info "#{@execution.language} source-code generated to #{@execution.output}"
+    end
+
+    def _apply_validations
       message = InputValidation.validate_inputs @execution
       unless message.nil?
         puts
         @logger.error message
         exit 100
       end
-
-      @logger.info "#{@execution.language} source-code generated to #{@execution.output}"
     end
   end
 end
