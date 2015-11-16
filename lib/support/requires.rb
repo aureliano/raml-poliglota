@@ -9,7 +9,7 @@ module RamlPoliglota
 
       def initialize
         @ignorable_source_files = [File.join('support', 'requires.rb'), File.join('raml_poliglota.rb')]
-        @dir_order = ['configuration', 'model', 'support', 'helper']
+        @dir_order = ['configuration', 'model', 'support', 'helper', 'validation']
         @lib_dir = File.dirname(__FILE__).sub /\/support$/, ''
       end
 
