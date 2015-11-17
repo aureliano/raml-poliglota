@@ -1,6 +1,7 @@
 require 'logging'
 require 'optparse'
 require 'raml_parser'
+require 'json'
 
 module RamlPoliglota
   module Support
