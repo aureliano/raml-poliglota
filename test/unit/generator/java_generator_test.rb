@@ -2,11 +2,11 @@ require 'test/unit'
 require 'logging'
 require File.expand_path '../../../assert_helper.rb', __FILE__
 require File.expand_path '../../../../lib/configuration/app_logger.rb', __FILE__
-require File.expand_path '../../../../lib/gen/java_generator.rb', __FILE__
+require File.expand_path '../../../../lib/generator/java_generator.rb', __FILE__
 
 class JavaGeneratorTest < Test::Unit::TestCase
   
-  include RamlPoliglota::Genenerator
+  include RamlPoliglota::Generator
 
   def test_generate
     gen = JavaGenerator.new

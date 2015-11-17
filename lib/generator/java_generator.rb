@@ -3,7 +3,7 @@ require File.expand_path '../code_generator.rb', __FILE__
 module RamlPoliglota
   module Generator
 
-    class JavaGen < CodeGenerator
+    class JavaGenerator < CodeGenerator
 
       def initialize
         @logger = AppLogger.create_logger self
