@@ -1,7 +1,7 @@
 module RamlPoliglota
-  module Generator
+  module Gen
 
-    class JavaGenerator < CodeGenerator
+    class JavaGenerator < CodeGen
 
       def initialize
         @logger = AppLogger.create_logger self
