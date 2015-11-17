@@ -1,3 +1,5 @@
+require File.expand_path '../code_gen.rb', __FILE__
+
 module RamlPoliglota
   module Gen
 
