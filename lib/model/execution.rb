@@ -3,7 +3,7 @@ module RamlPoliglota
 
     class Execution
       
-      attr_accessor :raml_path, :output, :language
+      attr_accessor :raml_path, :output, :language, :namespace
     
     end
 
