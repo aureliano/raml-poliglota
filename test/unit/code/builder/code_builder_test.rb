@@ -8,7 +8,7 @@ class CodeBuilderTest < Test::Unit::TestCase
   
   include RamlPoliglota::Support
   include RamlPoliglota::Code::Builder
-  #include RamlPoliglota::Code::Builder::Java  
+  include RamlPoliglota::Code::Builder::Java
 
   def test_create
     builder = CodeBuilder.create SUPPORTED_PROGRAMMING_LANGUAGES[:java]
