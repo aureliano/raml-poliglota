@@ -66,5 +66,13 @@ class MethodMetaTest < Test::Unit::TestCase
     m2.name = 'field'
     assert_not_equal m1, m2
   end
+
+  def test_has_parameters?
+    method = MethodMeta.new
+    assert_false method.has_parameters?
+
+    method.parameters = [AttributeMeta.new { |a| a.name = 'param' }]
+    assert_true method.has_parameters?
+  end
   
 end

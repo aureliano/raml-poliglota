@@ -14,6 +14,10 @@ module RamlPoliglota
         return (@name == obj.name && @parameters == obj.parameters)
       end
 
+      def has_parameters?
+        return !(@parameters.nil? || parameters.empty?)
+      end
+
     end
 
   end
