@@ -1,20 +1,20 @@
 require 'test/unit'
 require File.expand_path '../../../assert_helper.rb', __FILE__
 require File.expand_path '../../../../lib/support/supported_programming_languages.rb', __FILE__
-require File.expand_path '../../../../lib/gen/code_gen.rb', __FILE__
+require File.expand_path '../../../../lib/gen/code_generator.rb', __FILE__
 
-class CodeGenTest < Test::Unit::TestCase
+class CodeGeneratorTest < Test::Unit::TestCase
   
   include RamlPoliglota::Support
-  include RamlPoliglota::Gen
+  include RamlPoliglota::Generator
 
   def test_create
-    gen = CodeGen.create SUPPORTED_PROGRAMMING_LANGUAGES[:java]
-    assert_true gen.instance_of? JavaGen
+    gen = CodeGenerator.create SUPPORTED_PROGRAMMING_LANGUAGES[:java]
+    assert_true gen.instance_of? JavaGenerator
   end
 
   def test_generate
-    gen = CodeGen.new
+    gen = CodeGenerator.new
     assert_raise(RuntimeError) { gen.generate(nil) }
   end
 
