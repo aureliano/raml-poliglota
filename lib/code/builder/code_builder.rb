@@ -13,7 +13,7 @@ module RamlPoliglota
           end
         end
 
-        def build(hash)
+        def build_model(hash)
           raise "Method not implemented."
         end
 

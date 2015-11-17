@@ -13,9 +13,9 @@ class CodeBuilderTest < Test::Unit::TestCase
     assert_true builder.instance_of? JavaBuilder
   end
 
-  def test_build
+  def test_build_model
     builder = CodeBuilder.new
-    assert_raise(RuntimeError) { builder.generate(nil) }
+    assert_raise(RuntimeError) { builder.build_model(nil) }
   end
 
 end
