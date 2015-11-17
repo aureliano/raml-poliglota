@@ -1,7 +1,7 @@
 module RamlPoliglota
-  module Generator
+  module Gen
 
-    class CodeGenerator
+    class CodeGen
 
       include RamlPoliglota::Configuration
       include RamlPoliglota::Support
@@ -10,7 +10,7 @@ module RamlPoliglota
 
       def self.create(language)
         case language.name
-          when SUPPORTED_PROGRAMMING_LANGUAGES[:java].name then JavaGenerator.new
+          when SUPPORTED_PROGRAMMING_LANGUAGES[:java].name then JavaGen.new
           else raise "Unsupported programming language #{language.name}."
         end
       end
