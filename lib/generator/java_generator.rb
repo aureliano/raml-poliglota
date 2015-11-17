@@ -1,9 +1,9 @@
-require File.expand_path '../code_gen.rb', __FILE__
+require File.expand_path '../code_generator.rb', __FILE__
 
 module RamlPoliglota
-  module Gen
+  module Generator
 
-    class JavaGen < CodeGen
+    class JavaGen < CodeGenerator
 
       def initialize
         @logger = AppLogger.create_logger self
