@@ -19,8 +19,6 @@ module RamlPoliglota
     def execute
       @logger.info "Initialize RAML client code generation."
       @logger.info "RAML file path: #{@execution.raml_path}"
-      @logger.info "Target generation language: #{@execution.language}"
-      @logger.info "Target output: #{@execution.output}"
 
       _apply_validations
       raml = _parse_raml
