@@ -19,6 +19,7 @@ module RamlPoliglota
             _write_namespace clazz, text
             _write_documentation clazz, text
             _write_class_definition clazz, text
+            _write_attributes clazz, text
 
             text << "}"
           end
@@ -44,6 +45,13 @@ module RamlPoliglota
           def _write_class_definition(clazz, target)
             target << write_code("public class #{clazz.name} {", 0)
             target << "\n\n"
+          end
+
+          def _write_attributes(clazz, target)
+            return if clazz.attributes.nil?
+            clazz.attributes.each do |attribute|
+              target << write_code("#{attribute.visibility} #{attribute.type} #{attribute.name};\n", 1)
+            end
           end
 
         end

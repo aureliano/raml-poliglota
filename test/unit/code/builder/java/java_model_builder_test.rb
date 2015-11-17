@@ -17,7 +17,27 @@ class JavaBuilderTest < Test::Unit::TestCase
       c.namespace = 'br.mg.gv'
       c.name = 'BilboBaggins'
       c.documentation = 'A Java Bean class.'
+      
+      c.add_attribute(AttributeMeta.new do |a|
+        a.visibility = 'private'
+        a.type = 'Integer'
+        a.name = 'id'
+      end)
+      
+      c.add_attribute(AttributeMeta.new do |a|
+        a.visibility = 'protected'
+        a.type = 'String'
+        a.name = 'firstName'
+      end)
+      
+      c.add_attribute(AttributeMeta.new do |a|
+        a.visibility = 'protected'
+        a.type = 'String'
+        a.name = 'lastName'
+      end)
     end
+
+    puts " >>> #{clazz.attributes.size}"
 
     expected = <<-FIN
 package br.mg.gv;
@@ -29,6 +49,9 @@ package br.mg.gv;
 
 public class BilboBaggins {
 
+  private Integer id;
+  protected String firstName;
+  protected String lastName;
 }
 FIN
     expected.rstrip!
