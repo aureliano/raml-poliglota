@@ -1,0 +1,218 @@
+#%RAML 0.8
+---
+title: "Holy bible REST API"
+baseUri: http://localhost:5000/apirest
+version: v1
+schemas:
+  - bible: |
+      {  "$schema": "http://json-schema.org/draft-03/schema",
+         "type": "object",
+         "description": "Holy bible.",
+         "$linkedData": {
+           "books": {
+             "schema": "book",
+             "type": "collection",
+             "path": ["/bibles", "/{bibleId}", "/books"]
+           }
+         },
+         "properties": {
+           "bibleId": { "type": "integer", "required": true },
+           "name": { "type": "string", "required": true },
+           "language": { "type": "string", "required": true },
+           "url": { "type": "string", "required": false },
+           "edition": { "type": "string", "required": false },
+           "printedSource": { "type": "string", "required": true },
+           "eletronicTranscriptionSource": { "type": "string", "required": false },
+           "eletronicTranscriptionSourceUrl": { "type": "string", "required": false },
+           "copyright": { "type": "string", "required": false }
+         }
+      }
+  - bibles: |
+      {  "$schema": "http://json-schema.org/draft-03/schema",
+         "type": "object",
+         "description": "Available Holy Bible collection.",
+         "properties": {
+           "size":  { "type": "integer", "required": true },
+           "bibles": {
+             "type": "array",
+             "items": { "$ref": "bible" }
+           }
+         }
+       }
+  - book: |
+      {  "$schema": "http://json-schema.org/draft-03/schema",
+         "type": "object",
+         "description": "Book within the Holy Bible.",
+         "$linkedData": {
+           "chapters": {
+             "schema": "chapter",
+             "type": "collection",
+             "path": ["/books", "/{bookId}", "/chapters"]
+           },
+           "bible": {
+             "schema": "bible",
+             "type": "single",
+             "path": ["/bibles", "/{bibleId}"]
+           }
+         },
+         "properties": {
+           "bookId": { "type": "integer", "required": true },
+           "name": { "type": "string", "required": true },
+           "bibleId": { "type": "integer", "required": true }
+         }
+      }
+  - books: |
+      {  "$schema": "http://json-schema.org/draft-03/schema",
+         "type": "object",
+         "description": "Available books within the Holy Bible.",
+         "properties": {
+           "size":  { "type": "integer", "required": true },
+           "books": {
+             "type": "array",
+             "items": { "$ref": "book" }
+           }
+         }
+       }
+  - chapter: |
+      {  "$schema": "http://json-schema.org/draft-03/schema",
+         "type": "object",
+         "description": "Chapter of a book.",
+         "$linkedData": {
+           "verses": {
+             "schema": "verse",
+             "type": "collection",
+             "path": ["/chapters", "/{chapterId}", "/verses"]
+           },
+           "book": {
+             "schema": "book",
+             "type": "single",
+             "path": ["/books", "/{bookId}"]
+           }
+         },
+         "properties": {
+           "chapterId": { "type": "integer", "required": true },
+           "number": { "type": "string", "required": true },
+           "bookId": { "type": "integer", "required": true }
+         }
+      }
+  - chapters: |
+      {  "$schema": "http://json-schema.org/draft-03/schema",
+         "type": "object",
+         "description": "Available chapters of a book.",
+         "properties": {
+           "size":  { "type": "integer", "required": true },
+           "chapters": {
+             "type": "array",
+             "items": { "$ref": "chapter" }
+           }
+         }
+       }
+  - annotation: |
+      {  "$schema": "http://json-schema.org/draft-03/schema",
+         "type": "object",
+         "description": "Annotation of a verse.",
+         "properties": {
+           "number": { "type": "string", "required": true },
+           "text": { "type": "string", "required": true }
+         }
+      }
+  - verse: |
+      {  "$schema": "http://json-schema.org/draft-03/schema",
+         "type": "object",
+         "description": "Verse of a chapter.",
+         "$linkedData": {
+           "chapter": {
+             "schema": "chapter",
+             "type": "single",
+             "path": ["/chapters", "/{chapterId}"]
+           }
+         },
+         "properties": {
+           "verseId": { "type": "integer", "required": true },
+           "number": { "type": "string", "required": true },
+           "text": { "type": "string", "required": true },
+           "chapterId": { "type": "integer", "required": true },
+           "annotations": {
+             "type": "array",
+             "items": { "$ref": "annotation" }
+           }
+         }
+      }
+  - verses: |
+      {  "$schema": "http://json-schema.org/draft-03/schema",
+         "type": "object",
+         "description": "Available verses of a chapter.",
+         "properties": {
+           "size":  { "type": "integer", "required": true },
+           "verses": {
+             "type": "array",
+             "items": { "$ref": "verse" }
+           }
+         }
+       }
+
+resourceTypes:
+  - base:
+      get?:
+        responses: &standardResponses
+          200:
+            description: OK
+  - collection:
+      type: base
+      get:
+        is: [ paged ]
+  - typedCollection:
+      type: collection
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                schema: <<collectionSchema>>
+  - member:
+      type: base
+      get:
+  - typedMember:
+      type: member
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                schema: <<schema>>
+
+traits:
+  - paged:
+      displayName: paged
+      queryParameters:
+        start:
+          displayName: start
+          description: The first page to return (> 0)
+          type: integer
+        pages:
+          displayName: pages
+          description: The number of pages to return (> 0 <= 2)
+          type: integer
+
+/verses: &verses
+  type: { typedCollection: { schema: verse, collectionSchema: verses } }
+  /{verseId}:
+    type: { typedMember: { schema: verse } }
+
+/chapters: &chapters
+  type: { typedCollection: { schema: chapter, collectionSchema: chapters } }
+  /{chapterId}:
+    type: { typedMember: { schema: chapter } }
+    /verses: *verses
+
+/books: &books
+  type: { typedCollection: { schema: book, collectionSchema: books } }
+  /{bookId}:
+    type: { typedMember: { schema: book } }
+    /chapters: *chapters
+
+/bibles:
+  type: { typedCollection: { schema: bible, collectionSchema: bibles } }
+  /{bibleId}:
+    type: { typedMember: { schema: bible } }
+    /books: *books
