@@ -3,6 +3,7 @@ module RamlPoliglota
 
     class DataSchemaParser
 
+      include RamlPoliglota::Model
       include RamlPoliglota::Helper
 
       def initialize
@@ -17,9 +18,24 @@ module RamlPoliglota
         raise "Programming language not provided." if @language.nil?
         
         hash = JSON.parse @data_schema
-        hash['entity_name'] = StringHelper.send("to_#{@language.case}_case", @entity_name)
-        hash['namespace'] = @namespace
+
+        clazz = ClassMeta.new do |c|
+          c.namespace = @namespace
+          c.name = StringHelper.send("to_#{@language.case}_case", @entity_name)
+
+          next if hash['properties'].nil?
+          
+          hash['properties'].each do |key, value|
+            c.add_attribute AttributeMeta.new do |a|
+              a.name = key
+              a.type = value['type']
+              a.visibility = 'private'
+            end
+          end
+        end
+
         hash['language'] = @language
+        hash['class'] = clazz
 
         hash
       end

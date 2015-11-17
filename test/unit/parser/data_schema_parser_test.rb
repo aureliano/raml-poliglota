@@ -49,14 +49,17 @@ FIN
     hash = parser.parse
     assert_true hash.instance_of? Hash
 
-    assert_equal 'com.github.aureliano.bean', hash['namespace']
-    assert_equal 'BibleBean', hash['entity_name']
+    clazz = hash['class']
+    assert_not_nil clazz
+
+    assert_equal 'com.github.aureliano.bean', clazz.namespace
+    assert_equal 'BibleBean', clazz.name
     assert_equal SUPPORTED_PROGRAMMING_LANGUAGES[:java], hash['language']
 
     assert_equal 'http://json-schema.org/draft-03/schema', hash['$schema']
     assert_equal 'object', hash['type']
     assert_equal 'Holy bible.', hash['description']
-    assert_equal 6, hash['properties'].size
+    assert_equal 6, clazz.attributes.size
   end
   
 end
