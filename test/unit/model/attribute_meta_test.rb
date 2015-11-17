@@ -40,5 +40,24 @@ class AttributeMetaTest < Test::Unit::TestCase
     attribute.default_value = 'default_value'
     assert_equal 'default_value', attribute.default_value
   end
+
+  def test_equal
+    a1 = AttributeMeta.new do |a|
+      a.name = 'test'
+      a.type = 'int'
+    end
+
+    assert_not_equal a1, nil
+    assert_not_equal a1, ''
+    assert_not_equal a1, Array.new
+
+    a2 = AttributeMeta.new
+    a2.name = 'test'
+
+    assert_equal a1, a2
+
+    a2.name = 'field'
+    assert_not_equal a1, a2
+  end
   
 end
