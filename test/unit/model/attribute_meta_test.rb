@@ -11,8 +11,8 @@ class AttributeMetaTest < Test::Unit::TestCase
     assert_nil attribute.type
     assert_nil attribute.generic_type
     assert_nil attribute.visibility
-    assert_nil attribute.static_field
-    assert_nil attribute.final_field
+    assert_nil attribute.static
+    assert_nil attribute.final
     assert_nil attribute.init_vaule
     assert_nil attribute.default_value
     
@@ -28,11 +28,11 @@ class AttributeMetaTest < Test::Unit::TestCase
     attribute.visibility = 'visibility'
     assert_equal 'visibility', attribute.visibility
     
-    attribute.static_field = 'static_field'
-    assert_equal 'static_field', attribute.static_field
+    attribute.static = 'static'
+    assert_equal 'static', attribute.static
     
-    attribute.final_field = 'final_field'
-    assert_equal 'final_field', attribute.final_field
+    attribute.final = 'final'
+    assert_equal 'final', attribute.final
     
     attribute.init_vaule = 'init_vaule'
     assert_equal 'init_vaule', attribute.init_vaule
