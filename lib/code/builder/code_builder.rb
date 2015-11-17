@@ -8,7 +8,7 @@ module RamlPoliglota
 
         def self.create(language)
           case language.name
-            when SUPPORTED_PROGRAMMING_LANGUAGES[:java].name then JavaBuilder.new
+            when SUPPORTED_PROGRAMMING_LANGUAGES[:java].name then Java::JavaBuilder.new
             else raise "Unsupported programming language #{language.name}."
           end
         end
