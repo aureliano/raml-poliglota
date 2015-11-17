@@ -25,7 +25,7 @@ module RamlPoliglota
           command.language = language
         end
 
-        opts.on('-n', "--namespace [namespace]", String, 'The source code base namespace (package, module etc).') do |namespace|
+        opts.on('-n', "--namespace [namespace]", String, 'The base source code namespace (package, module etc).') do |namespace|
           command.namespace = namespace
         end
 
