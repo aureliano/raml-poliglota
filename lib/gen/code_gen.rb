@@ -3,7 +3,6 @@ module RamlPoliglota
 
     class CodeGen
 
-      include RamlPoliglota::Configuration
       include RamlPoliglota::Support
 
       attr_accessor :namespace

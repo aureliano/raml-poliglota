@@ -2,7 +2,6 @@ require 'test/unit'
 require 'logging'
 require File.expand_path '../../../assert_helper.rb', __FILE__
 require File.expand_path '../../../../lib/configuration/app_logger.rb', __FILE__
-require File.expand_path '../../../../lib/gen/code_gen.rb', __FILE__
 require File.expand_path '../../../../lib/gen/java_gen.rb', __FILE__
 
 class JavaGenTest < Test::Unit::TestCase
