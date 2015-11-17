@@ -25,6 +25,10 @@ module RamlPoliglota
           command.language = language
         end
 
+        opts.on('-n', "--namespace [namespace]", String, 'The source code base namespace (package, module etc).') do |namespace|
+          command.namespace = namespace
+        end
+
         opts.on_tail("-s", "--sources", "Show supported programming languages generation.") do
           puts "Supported programming languages: #{SUPPORTED_PROGRAMMING_LANGUAGES.join ', '}"
           exit
