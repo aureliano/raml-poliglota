@@ -14,6 +14,11 @@ module RamlPoliglota
         return @name == obj.name
       end
 
+      def add_attribute(attribute)
+        @attributes ||= []
+        @attributes << attribute
+      end
+
     end
 
   end
