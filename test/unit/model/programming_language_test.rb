@@ -12,6 +12,10 @@ class ProgrammingLanguageTest < Test::Unit::TestCase
       p.case = 'camel'
     end
 
+    assert_not_equal p1, nil
+    assert_not_equal p1, ''
+    assert_not_equal p1, Array.new
+
     p2 = ProgrammingLanguage.new
     p2.name = 'Java'
 
