@@ -1,7 +1,8 @@
 require 'test/unit'
+require File.expand_path '../../../../lib/model/execution.rb', __FILE__
+require File.expand_path '../../../../lib/model/programming_language.rb', __FILE__
 require File.expand_path '../../../../lib/validation/input_validation.rb', __FILE__
 require File.expand_path '../../../../lib/support/supported_programming_languages.rb', __FILE__
-require File.expand_path '../../../../lib/model/execution.rb', __FILE__
 
 class InputValidationTest < Test::Unit::TestCase
 

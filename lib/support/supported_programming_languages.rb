@@ -1,9 +1,14 @@
 module RamlPoliglota
   module Support
     
-    SUPPORTED_PROGRAMMING_LANGUAGES = [
-      'Java'
-    ]
+    include RamlPoliglota::Model
+    
+    SUPPORTED_PROGRAMMING_LANGUAGES = {
+      :java => ProgrammingLanguage.new do |p|
+        p.name = 'Java'
+        p.case = 'camel'
+      end
+    }
 
   end
 end

@@ -26,7 +26,9 @@ module RamlPoliglota
         return "Programming Language must not be empty." if StringHelper.empty? language
         include Support
 
-        found = SUPPORTED_PROGRAMMING_LANGUAGES.select { |supported| supported.downcase == language.downcase }
+        found = SUPPORTED_PROGRAMMING_LANGUAGES.select do |supported|
+          SUPPORTED_PROGRAMMING_LANGUAGES[supported].name.downcase == language.downcase
+        end
         return "#{language} is not a supported programming language." if found.empty?
       end
 
