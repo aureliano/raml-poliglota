@@ -1,7 +1,7 @@
 require 'test/unit'
 require File.expand_path '../../../assert_helper.rb', __FILE__
 require File.expand_path '../../../../lib/support/supported_programming_languages.rb', __FILE__
-require File.expand_path '../../../../lib/generator/code_gen.rb', __FILE__
+require File.expand_path '../../../../lib/gen/code_gen.rb', __FILE__
 
 class CodeGenTest < Test::Unit::TestCase
   
