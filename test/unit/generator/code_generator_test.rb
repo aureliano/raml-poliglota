@@ -8,7 +8,7 @@ class CodeGeneratorTest < Test::Unit::TestCase
 
   def test_generate
     gen = CodeGenerator.new
-    assert_raise(RuntimeError) { gen.generate }
+    assert_raise(RuntimeError) { gen.generate(nil) }
   end
 
 end

@@ -3,7 +3,7 @@ module RamlPoliglota
 
     class CodeGenerator
 
-      def generate
+      def generate(raml)
         raise "Method not implemented."
       end
 
