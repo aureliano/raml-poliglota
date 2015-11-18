@@ -3,9 +3,10 @@ module RamlPoliglota
     
     class InputValidation
 
-      include RamlPoliglota::Helper
+      include RamlPoliglota::Helper::String
+      include RamlPoliglota::Support
 
-      def self.validate_inputs(execution)
+      def validate_inputs(execution)
         message = _validate_raml_path execution.raml_path
         return message unless message.nil?
 
@@ -17,14 +18,13 @@ module RamlPoliglota
       end
 
       private
-      def self._validate_raml_path(raml_path)
-        return "RAML source path must not be empty." if StringHelper.empty? raml_path
+      def _validate_raml_path(raml_path)
+        return "RAML source path must not be empty." if string_empty? raml_path
         return "RAML file path #{raml_path} does not exist." unless File.exist? raml_path
       end
 
-      def self._validate_language(language)
-        return "Programming Language must not be empty." if StringHelper.empty? language
-        include Support
+      def _validate_language(language)
+        return "Programming Language must not be empty." if string_empty? language
 
         found = SUPPORTED_PROGRAMMING_LANGUAGES.select do |supported|
           SUPPORTED_PROGRAMMING_LANGUAGES[supported].name.downcase == language.downcase
@@ -32,8 +32,8 @@ module RamlPoliglota
         return "#{language} is not a supported programming language." if found.empty?
       end
 
-      def self._validate_output(output)
-        return "Target output must not be empty." if StringHelper.empty? output
+      def _validate_output(output)
+        return "Target output must not be empty." if string_empty? output
       end
 
     end

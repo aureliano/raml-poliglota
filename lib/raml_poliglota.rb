@@ -28,7 +28,7 @@ module RamlPoliglota
 
     private
     def _apply_validations
-      message = InputValidation.validate_inputs @execution
+      message = InputValidation.new.validate_inputs @execution
       unless message.nil?
         puts
         @logger.error message
