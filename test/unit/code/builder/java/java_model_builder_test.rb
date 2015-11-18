@@ -74,11 +74,25 @@ public class BilboBaggins {
   public void setLastName(String lastName) {
     this.lastName = lastName;
   }
+
+  public Integer withId(Integer id) {
+    this.id = id;
+    return this;
+  }
+
+  public String withFirstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
+
+  public String withLastName(String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
 }
 FIN
     expected.rstrip!
     actual = builder.build(clazz)
-    puts actual
     assert_equal expected, actual
   end
 
