@@ -11,9 +11,54 @@ module RamlPoliglota
             @logger = AppLogger.create_logger self
           end
 
-          def build_model(clazz)
-            return if clazz.nil?
+          def build_model(hash)
+            return if hash.nil?
+
+            clazz = hash['class']
+            clazz.attributes.each do |attribute|
+              clazz.add_method _create_getter(attribute)
+              clazz.add_method _create_setter(attribute)
+              clazz.add_method _create_builder(clazz.name, attribute)
+            end
+
             JavaModelBuilder.new.build clazz
+          end
+
+          private
+          def _create_getter(attribute)
+            MethodMeta.new do |method|
+              @logger.info "Cria getter para atributo #{attribute.name}"
+              method.visibility = 'public'
+              method.return_type = attribute.type
+              method.name = "get#{attribute.name[0].upcase}#{attribute.name[1, (attribute.name.size - 1)]}"
+              method.body = "return this.#{attribute.name};"
+            end
+          end
+
+          def _create_setter(attribute)
+            MethodMeta.new do |method|
+              method.visibility = 'public'
+              method.return_type = 'void'
+              method.name = "set#{attribute.name[0].upcase}#{attribute.name[1, (attribute.name.size - 1)]}"
+              method.body = "this.#{attribute.name} = #{attribute.name};"
+              method.add_parameter(AttributeMeta.new do |a|
+                a.type = attribute.type
+                a.name = attribute.name
+              end)
+            end
+          end
+
+          def _create_builder(class_name, attribute)
+            MethodMeta.new do |method|
+              method.visibility = 'public'
+              method.return_type = class_name
+              method.name = "with#{attribute.name[0].upcase}#{attribute.name[1, (attribute.name.size - 1)]}"
+              method.body = "this.#{attribute.name} = #{attribute.name};\nreturn this;"
+              method.add_parameter(AttributeMeta.new do |a|
+                a.type = attribute.type
+                a.name = attribute.name
+              end)
+            end
           end
           
         end

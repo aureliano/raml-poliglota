@@ -10,14 +10,25 @@ class CodeBuilderTest < Test::Unit::TestCase
   include RamlPoliglota::Code::Builder
   include RamlPoliglota::Code::Builder::Java
 
-  def test_create
-    builder = CodeBuilder.create SUPPORTED_PROGRAMMING_LANGUAGES[:java]
-    assert_true builder.instance_of? JavaBuilder
+  def test_initialization
+    assert_raise(ArgumentError) { CodeBuilder.new }
+
+    code_builder = CodeBuilder.new SUPPORTED_PROGRAMMING_LANGUAGES[:java]
+    assert_true code_builder.builder.instance_of? JavaBuilder
   end
 
   def test_build_model
-    builder = CodeBuilder.new
-    assert_raise(RuntimeError) { builder.build_model(nil) }
+    builder = CodeBuilder.new SUPPORTED_PROGRAMMING_LANGUAGES[:java]
+    
+    clazz = CLASS_META_FACTORY[:model][:bilbo_baggins][:object]
+    clazz.methods.clear
+    hash = Hash.new
+    hash['class'] = clazz
+
+    expected = CLASS_META_FACTORY[:model][:bilbo_baggins][:text]
+    actual = builder.build_model(hash)
+
+    assert_equal expected, actual
   end
 
 end
