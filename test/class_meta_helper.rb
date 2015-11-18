@@ -35,40 +35,10 @@ def _create_class_meta_model(name)
 
     c.add_method(MethodMeta.new do |m|
       m.visibility = 'public'
-      m.return_type = 'String'
-      m.name = 'getFirstName'
-      m.body = "return this.firstName;"
-    end)
-
-    c.add_method(MethodMeta.new do |m|
-      m.visibility = 'public'
-      m.return_type = 'String'
-      m.name = 'getLastName'
-      m.body = "return this.lastName;"
-    end)
-
-    c.add_method(MethodMeta.new do |m|
-      m.visibility = 'public'
       m.return_type = 'void'
       m.name = 'setId'
       m.parameters = [AttributeMeta.new { |a| a.name = 'id'; a.type = 'Integer' }]
       m.body = "this.id = id;"
-    end)
-
-    c.add_method(MethodMeta.new do |m|
-      m.visibility = 'public'
-      m.return_type = 'void'
-      m.name = 'setFirstName'
-      m.parameters = [AttributeMeta.new { |a| a.name = 'firstName'; a.type = 'String' }]
-      m.body = "this.firstName = firstName;"
-    end)
-
-    c.add_method(MethodMeta.new do |m|
-      m.visibility = 'public'
-      m.return_type = 'void'
-      m.name = 'setLastName'
-      m.parameters = [AttributeMeta.new { |a| a.name = 'lastName'; a.type = 'String' }]
-      m.body = "this.lastName = lastName;"
     end)
 
     c.add_method(MethodMeta.new do |m|
@@ -81,10 +51,40 @@ def _create_class_meta_model(name)
 
     c.add_method(MethodMeta.new do |m|
       m.visibility = 'public'
+      m.return_type = 'String'
+      m.name = 'getFirstName'
+      m.body = "return this.firstName;"
+    end)
+
+    c.add_method(MethodMeta.new do |m|
+      m.visibility = 'public'
+      m.return_type = 'void'
+      m.name = 'setFirstName'
+      m.parameters = [AttributeMeta.new { |a| a.name = 'firstName'; a.type = 'String' }]
+      m.body = "this.firstName = firstName;"
+    end)
+
+    c.add_method(MethodMeta.new do |m|
+      m.visibility = 'public'
       m.return_type = 'BilboBaggins'
       m.name = 'withFirstName'
       m.parameters = [AttributeMeta.new { |a| a.name = 'firstName'; a.type = 'String' }]
       m.body = "this.firstName = firstName;\nreturn this;"
+    end)
+
+    c.add_method(MethodMeta.new do |m|
+      m.visibility = 'public'
+      m.return_type = 'String'
+      m.name = 'getLastName'
+      m.body = "return this.lastName;"
+    end)
+
+    c.add_method(MethodMeta.new do |m|
+      m.visibility = 'public'
+      m.return_type = 'void'
+      m.name = 'setLastName'
+      m.parameters = [AttributeMeta.new { |a| a.name = 'lastName'; a.type = 'String' }]
+      m.body = "this.lastName = lastName;"
     end)
 
     c.add_method(MethodMeta.new do |m|
@@ -116,24 +116,8 @@ public class #{name} {
     return this.id;
   }
 
-  public String getFirstName() {
-    return this.firstName;
-  }
-
-  public String getLastName() {
-    return this.lastName;
-  }
-
   public void setId(Integer id) {
     this.id = id;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
   }
 
   public #{name} withId(Integer id) {
@@ -141,9 +125,25 @@ public class #{name} {
     return this;
   }
 
+  public String getFirstName() {
+    return this.firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
   public #{name} withFirstName(String firstName) {
     this.firstName = firstName;
     return this;
+  }
+
+  public String getLastName() {
+    return this.lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   public #{name} withLastName(String lastName) {
