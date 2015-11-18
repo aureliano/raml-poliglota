@@ -18,6 +18,11 @@ module RamlPoliglota
         return !(@parameters.nil? || parameters.empty?)
       end
 
+      def add_parameter(parameter)
+        @parameters ||= []
+        @parameters << parameter
+      end
+
     end
 
   end
