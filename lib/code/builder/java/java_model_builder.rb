@@ -22,6 +22,8 @@ module RamlPoliglota
             _write_attributes clazz, text
             text << "\n"
             _write_getters clazz, text
+            text << "\n\n"
+            _write_setters clazz, text
 
             text << "\n}"
           end
@@ -69,8 +71,22 @@ module RamlPoliglota
             end.join("\n\n")
           end
 
+          def _write_setters(clazz, target)
+            return if clazz.attributes.nil?
+
+            target << clazz.attributes.collect do |attribute|
+              method_name = "set#{attribute.name[0].upcase}#{attribute.name[1, (attribute.name.size - 1)]}"
+              parameter = "#{attribute.type} #{attribute.name}"
+
+              text = write_string("public void #{method_name}(#{parameter}) {\n", 1)
+              text << write_string("this.#{attribute.name} = #{attribute.name};\n", 2)
+              text << write_string("}", 1)
+
+              text
+            end.join("\n\n")
+          end
+
         end
-      
       end
     end
   end

@@ -37,8 +37,6 @@ class JavaBuilderTest < Test::Unit::TestCase
       end)
     end
 
-    puts " >>> #{clazz.attributes.size}"
-
     expected = <<-FIN
 package br.mg.gv;
 
@@ -63,6 +61,18 @@ public class BilboBaggins {
 
   public String getLastName() {
     return this.lastName;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 }
 FIN
