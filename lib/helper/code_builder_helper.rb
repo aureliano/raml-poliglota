@@ -22,6 +22,10 @@ module RamlPoliglota
         end.join("\n")
       end
 
+      def write_java_attribute(attribute)
+        write_code("#{attribute.visibility} #{attribute.type} #{attribute.name};", 1)
+      end
+
     end
   end
 end

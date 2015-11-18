@@ -1,10 +1,12 @@
 require 'test/unit'
 require File.expand_path '../../../assert_helper.rb', __FILE__
+require File.expand_path '../../../../lib/model/attribute_meta.rb', __FILE__
 require File.expand_path '../../../../lib/helper/code_builder_helper.rb', __FILE__
 
 class CodeBuilderHelperTest < Test::Unit::TestCase
 
   include RamlPoliglota::Helper::CodeBuilder
+  include RamlPoliglota::Model
 
   def test_write_tabulation
     assert_equal '', write_tabulation(0)
@@ -25,6 +27,24 @@ class CodeBuilderHelperTest < Test::Unit::TestCase
   def test_write_code
     assert_equal '  test', write_code('test', 1)
     assert_equal "  test\n  done", write_code(['test', 'done'], 1)
+  end
+
+  def test_write_java_attribute
+    text = write_java_attribute(AttributeMeta.new do |a|
+      a.visibility = 'private'
+      a.type = 'Integer'
+      a.name = 'id'
+    end)
+
+    assert_equal '  private Integer id;', text
+
+    text = write_java_attribute(AttributeMeta.new do |a|
+      a.visibility = 'protected'
+      a.type = 'String'
+      a.name = 'name'
+    end)
+
+    assert_equal '  protected String name;', text
   end
 
 end
