@@ -63,5 +63,17 @@ class ClassMetaTest < Test::Unit::TestCase
     assert_equal 2, c.attributes.size
     assert_equal 'field_2', c.attributes[1].name
   end
+
+  def test_add_method
+    c = ClassMeta.new
+
+    c.add_method(MethodMeta.new { |m| m.name = 'method_1' })
+    assert_equal 1, c.methods.size
+    assert_equal 'method_1', c.methods[0].name
+
+    c.add_method(MethodMeta.new { |m| m.name = 'method_2' })
+    assert_equal 2, c.methods.size
+    assert_equal 'method_2', c.methods[1].name
+  end
   
 end

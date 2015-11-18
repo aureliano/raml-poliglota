@@ -19,6 +19,11 @@ module RamlPoliglota
         @attributes << attribute
       end
 
+      def add_method(method)
+        @methods ||= []
+        @methods << method
+      end
+
     end
 
   end
