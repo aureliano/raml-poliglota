@@ -1,6 +1,7 @@
 require 'test/unit'
 require File.expand_path '../../../assert_helper.rb', __FILE__
 require File.expand_path '../../../../lib/model/attribute_meta.rb', __FILE__
+require File.expand_path '../../../../lib/model/method_meta.rb', __FILE__
 require File.expand_path '../../../../lib/helper/code_builder_helper.rb', __FILE__
 
 class CodeBuilderHelperTest < Test::Unit::TestCase
@@ -45,6 +46,30 @@ class CodeBuilderHelperTest < Test::Unit::TestCase
     end)
 
     assert_equal '  protected String name;', text
+  end
+
+  def test_write_java_method
+    text = write_java_method(MethodMeta.new do |m|
+      m.visibility = 'protected'
+      m.return_type = 'Integer'
+      m.name = 'getId'
+      m.body = 'return this.id;'
+    end)
+
+    assert_equal "  protected Integer getId() {\n    return this.id;\n  }", text
+
+    text = write_java_method(MethodMeta.new do |m|
+      m.visibility = 'public'
+      m.return_type = 'void'
+      m.name = 'setId'
+      m.add_parameter(AttributeMeta.new do |a|
+        a.type = 'Integer'
+        a.name = 'id'
+      end)
+      m.body = 'this.id = id;'
+    end)
+
+    assert_equal "  public void setId(Integer id) {\n    this.id = id;\n  }", text
   end
 
 end

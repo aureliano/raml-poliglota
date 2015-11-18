@@ -26,6 +26,20 @@ module RamlPoliglota
         write_code("#{attribute.visibility} #{attribute.type} #{attribute.name};", 1)
       end
 
+      def write_java_method(method)
+        text = write_code("#{method.visibility} #{method.return_type} #{method.name}(", 1)
+
+        unless method.parameters.nil?
+          params = method.parameters.collect { |p| "#{p.type} #{p.name}" }.join(", ")
+          text << write_code(params, 0)
+        end
+
+        text << ") {\n"
+        text << write_code(method.body.to_s.split("\n"), 2)
+        text << "\n"
+        text << (write_code "}", 1)
+      end
+
     end
   end
 end
