@@ -12,8 +12,16 @@ class JavaBuilderTest < Test::Unit::TestCase
 
   def test_build
     builder = JavaModelBuilder.new
+    clazz = _class_object
 
-    clazz = ClassMeta.new do |c|
+    expected = _class_text
+    actual = builder.build(clazz)
+    assert_equal expected, actual
+  end
+
+  private
+  def _class_object
+    ClassMeta.new do |c|
       c.namespace = 'br.mg.gv'
       c.name = 'BilboBaggins'
       c.documentation = 'A Java Bean class.'
@@ -35,9 +43,80 @@ class JavaBuilderTest < Test::Unit::TestCase
         a.type = 'String'
         a.name = 'lastName'
       end)
-    end
 
-    expected = <<-FIN
+      c.add_method(MethodMeta.new do |m|
+        m.visibility = 'public'
+        m.return_type = 'Integer'
+        m.name = 'getId'
+        m.body = "return this.id;"
+      end)
+
+      c.add_method(MethodMeta.new do |m|
+        m.visibility = 'public'
+        m.return_type = 'String'
+        m.name = 'getFirstName'
+        m.body = "return this.firstName;"
+      end)
+
+      c.add_method(MethodMeta.new do |m|
+        m.visibility = 'public'
+        m.return_type = 'String'
+        m.name = 'getLastName'
+        m.body = "return this.lastName;"
+      end)
+
+      c.add_method(MethodMeta.new do |m|
+        m.visibility = 'public'
+        m.return_type = 'void'
+        m.name = 'setId'
+        m.parameters = [AttributeMeta.new { |a| a.name = 'id'; a.type = 'Integer' }]
+        m.body = "this.id = id;"
+      end)
+
+      c.add_method(MethodMeta.new do |m|
+        m.visibility = 'public'
+        m.return_type = 'void'
+        m.name = 'setFirstName'
+        m.parameters = [AttributeMeta.new { |a| a.name = 'firstName'; a.type = 'String' }]
+        m.body = "this.firstName = firstName;"
+      end)
+
+      c.add_method(MethodMeta.new do |m|
+        m.visibility = 'public'
+        m.return_type = 'void'
+        m.name = 'setLastName'
+        m.parameters = [AttributeMeta.new { |a| a.name = 'lastName'; a.type = 'String' }]
+        m.body = "this.lastName = lastName;"
+      end)
+
+      c.add_method(MethodMeta.new do |m|
+        m.visibility = 'public'
+        m.return_type = 'BilboBaggins'
+        m.name = 'withId'
+        m.parameters = [AttributeMeta.new { |a| a.name = 'id'; a.type = 'Integer' }]
+        m.body = "this.id = id;\nreturn this;"
+      end)
+
+      c.add_method(MethodMeta.new do |m|
+        m.visibility = 'public'
+        m.return_type = 'BilboBaggins'
+        m.name = 'withFirstName'
+        m.parameters = [AttributeMeta.new { |a| a.name = 'firstName'; a.type = 'String' }]
+        m.body = "this.firstName = firstName;\nreturn this;"
+      end)
+
+      c.add_method(MethodMeta.new do |m|
+        m.visibility = 'public'
+        m.return_type = 'BilboBaggins'
+        m.name = 'withLastName'
+        m.parameters = [AttributeMeta.new { |a| a.name = 'lastName'; a.type = 'String' }]
+        m.body = "this.lastName = lastName;\nreturn this;"
+      end)
+    end
+  end
+
+  def _class_text
+    text = <<-FIN
 package br.mg.gv;
 
 /**
@@ -75,25 +154,23 @@ public class BilboBaggins {
     this.lastName = lastName;
   }
 
-  public Integer withId(Integer id) {
+  public BilboBaggins withId(Integer id) {
     this.id = id;
     return this;
   }
 
-  public String withFirstName(String firstName) {
+  public BilboBaggins withFirstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
 
-  public String withLastName(String lastName) {
+  public BilboBaggins withLastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
 }
 FIN
-    expected.rstrip!
-    actual = builder.build(clazz)
-    assert_equal expected, actual
+    text.rstrip
   end
 
 end

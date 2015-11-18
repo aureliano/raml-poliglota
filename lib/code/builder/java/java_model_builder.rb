@@ -20,12 +20,8 @@ module RamlPoliglota
             _write_documentation clazz, text
             _write_class_definition clazz, text
             _write_attributes clazz, text
-            text << "\n"
-            _write_getters clazz, text
             text << "\n\n"
-            _write_setters clazz, text
-            text << "\n\n"
-            _write_builders clazz, text
+            _write_methods clazz, text
 
             text << "\n}"
           end
@@ -55,52 +51,15 @@ module RamlPoliglota
 
           def _write_attributes(clazz, target)
             return if clazz.attributes.nil?
-            clazz.attributes.each do |attribute|
-              target << write_code("#{attribute.visibility} #{attribute.type} #{attribute.name};\n", 1)
-            end
+            target << clazz.attributes.collect do |attribute|
+              "#{write_java_attribute(attribute)}"
+            end.join("\n")
           end
 
-          def _write_getters(clazz, target)
-            return if clazz.attributes.nil?
-
-            target << clazz.attributes.collect do |attribute|
-              method_name = "get#{attribute.name[0].upcase}#{attribute.name[1, (attribute.name.size - 1)]}()"
-              text = write_string("public #{attribute.type} #{method_name} {\n", 1)
-              text << write_string("return this.#{attribute.name};\n", 2)
-              text << write_string("}", 1)
-
-              text
-            end.join("\n\n")
-          end
-
-          def _write_setters(clazz, target)
-            return if clazz.attributes.nil?
-
-            target << clazz.attributes.collect do |attribute|
-              method_name = "set#{attribute.name[0].upcase}#{attribute.name[1, (attribute.name.size - 1)]}"
-              parameter = "#{attribute.type} #{attribute.name}"
-
-              text = write_string("public void #{method_name}(#{parameter}) {\n", 1)
-              text << write_string("this.#{attribute.name} = #{attribute.name};\n", 2)
-              text << write_string("}", 1)
-
-              text
-            end.join("\n\n")
-          end
-
-          def _write_builders(clazz, target)
-            return if clazz.attributes.nil?
-
-            target << clazz.attributes.collect do |attribute|
-              method_name = "with#{attribute.name[0].upcase}#{attribute.name[1, (attribute.name.size - 1)]}"
-              parameter = "#{attribute.type} #{attribute.name}"
-
-              text = write_string("public #{attribute.type} #{method_name}(#{parameter}) {\n", 1)
-              text << write_string("this.#{attribute.name} = #{attribute.name};\n", 2)
-              text << write_string("return this;\n", 2)
-              text << write_string("}", 1)
-
-              text
+          def _write_methods(clazz, target)
+            return if clazz.methods.nil?
+            target << clazz.methods.collect do |method|
+              write_java_method(method)
             end.join("\n\n")
           end
 
