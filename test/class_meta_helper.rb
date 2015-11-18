@@ -152,14 +152,30 @@ public class #{name} {
   }
 }
 FIN
-    text.rstrip
+  text.rstrip
+end
+
+def _create_json_class_model
+  text = <<-FIN
+{  "$schema": "http://json-schema.org/draft-03/schema",
+   "type": "object",
+   "description": "A Java Bean class.",
+   "properties": {
+     "id": { "type": "integer", "required": true },
+     "firstName": { "type": "string", "required": true },
+     "lastName": { "type": "string", "required": true }
+   }
+}
+FIN
+  text.rstrip
 end
 
 CLASS_META_FACTORY = {
   :model => {
     :bilbo_baggins => {
       :object => _create_class_meta_model('BilboBaggins'),
-      :text => _create_text_class_model('BilboBaggins')
+      :text => _create_text_class_model('BilboBaggins'),
+      :json => _create_json_class_model
     }
   }
 }
