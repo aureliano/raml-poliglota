@@ -51,5 +51,17 @@ class ClassMetaTest < Test::Unit::TestCase
     a2.name = 'field'
     assert_not_equal a1, a2
   end
+
+  def test_add_attribute
+    c = ClassMeta.new
+
+    c.add_attribute(AttributeMeta.new { |a| a.name = 'field_1' })
+    assert_equal 1, c.attributes.size
+    assert_equal 'field_1', c.attributes[0].name
+
+    c.add_attribute(AttributeMeta.new { |a| a.name = 'field_2' })
+    assert_equal 2, c.attributes.size
+    assert_equal 'field_2', c.attributes[1].name
+  end
   
 end
