@@ -52,10 +52,23 @@ public class BilboBaggins {
   private Integer id;
   protected String firstName;
   protected String lastName;
+
+  public Integer getId() {
+    return this.id;
+  }
+
+  public String getFirstName() {
+    return this.firstName;
+  }
+
+  public String getLastName() {
+    return this.lastName;
+  }
 }
 FIN
     expected.rstrip!
     actual = builder.build(clazz)
+    puts actual
     assert_equal expected, actual
   end
 

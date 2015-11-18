@@ -20,8 +20,10 @@ module RamlPoliglota
             _write_documentation clazz, text
             _write_class_definition clazz, text
             _write_attributes clazz, text
+            text << "\n"
+            _write_getters clazz, text
 
-            text << "}"
+            text << "\n}"
           end
 
           private
@@ -52,6 +54,19 @@ module RamlPoliglota
             clazz.attributes.each do |attribute|
               target << write_code("#{attribute.visibility} #{attribute.type} #{attribute.name};\n", 1)
             end
+          end
+
+          def _write_getters(clazz, target)
+            return if clazz.attributes.nil?
+
+            target << clazz.attributes.collect do |attribute|
+              method_name = "get#{attribute.name[0].upcase}#{attribute.name[1, (attribute.name.size - 1)]}()"
+              text = write_string("public #{attribute.type} #{method_name} {\n", 1)
+              text << write_string("return this.#{attribute.name};\n", 2)
+              text << write_string("}", 1)
+
+              text
+            end.join("\n\n")
           end
 
         end
