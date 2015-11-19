@@ -162,6 +162,10 @@ CLASS_META_FACTORY = {
     :bilbo_baggins => {
       :object => _create_class_meta_model('BilboBaggins'),
       :text => _create_text_class_model('BilboBaggins')
+    },
+    :frodo_baggins => {
+      :object => _create_class_meta_model('FrodoBaggins'),
+      :text => _create_text_class_model('FrodoBaggins')
     }
   }
 }
