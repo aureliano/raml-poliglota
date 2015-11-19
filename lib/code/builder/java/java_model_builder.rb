@@ -15,6 +15,7 @@ module RamlPoliglota
           def build(clazz)
             return if clazz.nil?
 
+            @logger.debug "Write model class #{clazz.namespace}.#{clazz.name}"
             text = ''
             _write_namespace clazz, text
             _write_documentation clazz, text

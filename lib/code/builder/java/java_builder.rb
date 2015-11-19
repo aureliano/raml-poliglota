@@ -27,7 +27,8 @@ module RamlPoliglota
           private
           def _create_getter(attribute)
             MethodMeta.new do |method|
-              @logger.info "Cria getter para atributo #{attribute.name}"
+              @logger.debug "Create getter to attribute #{attribute.name}"
+
               method.visibility = 'public'
               method.return_type = attribute.type
               method.name = "get#{attribute.name[0].upcase}#{attribute.name[1, (attribute.name.size - 1)]}"
@@ -37,6 +38,8 @@ module RamlPoliglota
 
           def _create_setter(attribute)
             MethodMeta.new do |method|
+              @logger.debug "Create setter to attribute #{attribute.name}"
+
               method.visibility = 'public'
               method.return_type = 'void'
               method.name = "set#{attribute.name[0].upcase}#{attribute.name[1, (attribute.name.size - 1)]}"
@@ -50,6 +53,8 @@ module RamlPoliglota
 
           def _create_builder(class_name, attribute)
             MethodMeta.new do |method|
+              @logger.debug "Create builder accessor to attribute #{attribute.name}"
+
               method.visibility = 'public'
               method.return_type = class_name
               method.name = "with#{attribute.name[0].upcase}#{attribute.name[1, (attribute.name.size - 1)]}"
