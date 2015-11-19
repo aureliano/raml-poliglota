@@ -1,5 +1,5 @@
 require 'test/unit'
-require File.expand_path '../../../assert_helper.rb', __FILE__
+require File.expand_path '../../../test_helper.rb', __FILE__
 require File.expand_path '../../../../lib/model/programming_language.rb', __FILE__
 
 class ProgrammingLanguageTest < Test::Unit::TestCase

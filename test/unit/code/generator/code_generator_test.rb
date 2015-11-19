@@ -1,5 +1,5 @@
 require 'test/unit'
-require File.expand_path '../../../../assert_helper.rb', __FILE__
+require File.expand_path '../../../../test_helper.rb', __FILE__
 require File.expand_path '../../../../../lib/support/supported_programming_languages.rb', __FILE__
 require File.expand_path '../../../../../lib/code/generator/code_generator.rb', __FILE__
 

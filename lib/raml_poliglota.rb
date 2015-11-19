@@ -12,7 +12,6 @@ module RamlPoliglota
     def initialize
       yield self if block_given?
 
-      @execution.logger_level = 'debug' if ENV['ENVIRONMENT'] == 'test'
       AppLogger.set_default_level @execution.logger_level
       @logger = AppLogger.create_logger self
     end

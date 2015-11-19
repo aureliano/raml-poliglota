@@ -1,6 +1,6 @@
 require 'test/unit'
 require 'json'
-require File.expand_path '../../../assert_helper.rb', __FILE__
+require File.expand_path '../../../test_helper.rb', __FILE__
 require File.expand_path '../../../../lib/support/supported_programming_languages.rb', __FILE__
 require File.expand_path '../../../../lib/parser/data_schema_parser.rb', __FILE__
 

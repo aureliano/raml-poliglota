@@ -1,4 +1,6 @@
 require File.expand_path '../../lib/model/class_meta.rb', __FILE__
+require File.expand_path '../../lib/model/attribute_meta.rb', __FILE__
+require File.expand_path '../../lib/model/method_meta.rb', __FILE__
 
 include RamlPoliglota::Model
 
