@@ -10,7 +10,16 @@ class JavaBuilderTest < Test::Unit::TestCase
 
   def test_build_model
     builder = JavaBuilder.new
-    assert_nothing_raised(RuntimeError) { builder.build_model(nil) }
+    
+    clazz = CLASS_META_FACTORY[:model][:bilbo_baggins][:object]
+    clazz.methods.clear
+    hash = Hash.new
+    hash['class'] = clazz
+
+    expected = CLASS_META_FACTORY[:model][:bilbo_baggins][:text]
+    actual = builder.build_model(hash)
+
+    assert_equal expected, actual
   end
 
 end
