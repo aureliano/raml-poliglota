@@ -3,7 +3,9 @@ require File.expand_path '../support/requires.rb', __FILE__
 RamlPoliglota::Support::SourceLoader.new.load_project_source_files
 
 include RamlPoliglota::Configuration
+include RamlPoliglota::Support
 include RamlPoliglota::Validation
+include RamlPoliglota::Code::Generator
 
 module RamlPoliglota
 
@@ -24,6 +26,9 @@ module RamlPoliglota
 
       _apply_validations
       raml = _parse_raml
+
+      generator = _create_code_generator
+      generator.generate raml
 
       @logger.info "#{@execution.language} source-code generated to #{@execution.output}"
     end
@@ -46,6 +51,11 @@ module RamlPoliglota
         @logger.error ex.message
         exit 101
       end
+    end
+
+    def _create_code_generator
+      language = SUPPORTED_PROGRAMMING_LANGUAGES[@execution.language.to_s.downcase.to_sym]
+      CodeGenerator.create language
     end
 
   end
