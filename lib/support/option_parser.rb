@@ -29,6 +29,10 @@ module RamlPoliglota
           command.namespace = namespace
         end
 
+        opts.on("--logger [level]", String, 'The logger level [debug, info, warn, error].') do |level|
+          command.logger_level = level
+        end
+
         opts.on_tail("-s", "--sources", "Show supported programming languages generation.") do
           puts "Supported programming languages: #{SUPPORTED_PROGRAMMING_LANGUAGES.join ', '}"
           exit

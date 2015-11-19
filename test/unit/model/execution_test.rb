@@ -11,6 +11,7 @@ class ExecutionTest < Test::Unit::TestCase
     assert_nil exec.raml_path
     assert_nil exec.output
     assert_nil exec.namespace
+    assert_nil exec.logger_level
     
     exec.language = 'Java'
     assert_equal 'Java', exec.language
@@ -23,6 +24,9 @@ class ExecutionTest < Test::Unit::TestCase
 
     exec.namespace = 'br.mg.gv'
     assert_equal 'br.mg.gv', exec.namespace
+
+    exec.logger_level = 'info'
+    assert_equal 'info', exec.logger_level
   end
   
 end
