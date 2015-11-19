@@ -10,8 +10,11 @@ module RamlPoliglota
   class RamlPoliglota
 
     def initialize
-      @logger = AppLogger.create_logger self
       yield self if block_given?
+
+      @execution.logger_level = 'debug' if ENV['ENVIRONMENT'] == 'test'
+      AppLogger.set_default_level @execution.logger_level
+      @logger = AppLogger.create_logger self
     end
 
     attr_accessor :execution
