@@ -26,11 +26,11 @@ module RamlPoliglota
           next if hash['properties'].nil?
           
           hash['properties'].each do |key, value|
-            c.add_attribute AttributeMeta.new do |a|
+            c.add_attribute(AttributeMeta.new do |a|
               a.name = key
               a.type = value['type']
               a.visibility = 'private'
-            end
+            end)
           end
         end
 
