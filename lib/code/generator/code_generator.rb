@@ -6,7 +6,7 @@ module RamlPoliglota
 
         include Support
 
-        attr_accessor :namespace
+        attr_accessor :namespace, :output_dir
 
         def self.create(language)
           case language.name
