@@ -27,8 +27,7 @@ module RamlPoliglota
       _apply_validations
       raml = _parse_raml
 
-      generator = _create_code_generator
-      generator.generate raml
+      _generate_code raml
 
       @logger.info "#{@execution.language} source-code generated to #{@execution.output}"
     end
@@ -56,6 +55,13 @@ module RamlPoliglota
     def _create_code_generator
       language = SUPPORTED_PROGRAMMING_LANGUAGES[@execution.language.to_s.downcase.to_sym]
       CodeGenerator.create language
+    end
+
+    def _generate_code(raml)
+      generator = _create_code_generator
+      generator.namespace = @execution.namespace
+      generator.output_dir = @execution.output
+      generator.generate raml
     end
 
   end
