@@ -19,6 +19,18 @@ module RamlPoliglota
           raise "Method not implemented."
         end
 
+        def write_source_file(sub_dir, entity_name, content)
+          dir = File.join @output_dir, sub_dir
+          unless File.exist? dir
+            @logger.debug "Creating directory path #{dir}"
+            FileUtils.mkdir_p dir
+          end
+
+          file_path = File.join @output_dir, sub_dir, "#{entity_name}.#{@language.name.downcase}"
+          @logger.debug "Creating model file #{file_path}"
+          File.open(file_path, 'w') { |file| file.write content }
+        end
+
       end
 
     end
