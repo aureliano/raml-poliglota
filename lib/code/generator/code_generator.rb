@@ -27,7 +27,7 @@ module RamlPoliglota
           end
 
           file_path = File.join @output_dir, sub_dir, "#{entity_name}.#{@language.name.downcase}"
-          @logger.debug "Creating model file #{file_path}"
+          @logger.debug "Creating source file #{file_path}"
           File.open(file_path, 'w') { |file| file.write content }
         end
 
