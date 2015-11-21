@@ -3,6 +3,7 @@ require File.expand_path '../../../test_helper.rb', __FILE__
 require File.expand_path '../../../../lib/model/attribute_meta.rb', __FILE__
 require File.expand_path '../../../../lib/model/method_meta.rb', __FILE__
 require File.expand_path '../../../../lib/helper/code_builder_helper.rb', __FILE__
+require File.expand_path '../../../../lib/helper/string_helper.rb', __FILE__
 
 class CodeBuilderHelperTest < Test::Unit::TestCase
 
@@ -70,6 +71,20 @@ class CodeBuilderHelperTest < Test::Unit::TestCase
     end)
 
     assert_equal "  public void setId(Integer id) {\n    this.id = id;\n  }", text
+  end
+
+  def test_js_to_java_type
+    assert_raise(RuntimeError) { js_to_java_type nil }
+    assert_raise(RuntimeError) { js_to_java_type '' }
+
+    assert_equal 'String', js_to_java_type('string')
+    assert_equal 'Double', js_to_java_type('number')
+    assert_equal 'Integer', js_to_java_type('integer')
+    assert_equal 'Boolean', js_to_java_type('boolean')
+    assert_equal 'Object', js_to_java_type('value')
+    assert_equal 'java.util.List', js_to_java_type('array')
+    assert_equal 'Object', js_to_java_type('object')
+    assert_equal 'FrodoBaggins', js_to_java_type('frodoBaggins')
   end
 
 end
