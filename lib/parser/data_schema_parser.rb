@@ -22,6 +22,7 @@ module RamlPoliglota
         clazz = ClassMeta.new do |c|
           c.namespace = @namespace
           c.name = send("to_#{@language.case}_case", @entity_name)
+          c.documentation = hash['description']
 
           next if hash['properties'].nil?
           
