@@ -30,6 +30,12 @@ module RamlPoliglota
           return if schemas.nil? || schemas.empty?
           @logger.info ' > Generate Java Beans.'
 
+          model_dir = File.join @output_dir, 'model'
+          unless File.exist? model_dir
+            @logger.debug "Creating directory path #{model_dir}"
+            FileUtils.mkdir_p model_dir
+          end
+
           parser = DataSchemaParser.new do |p|
             p.namespace = @namespace
             p.language = @language
@@ -41,7 +47,9 @@ module RamlPoliglota
             parser.data_schema = value
 
             hash = parser.parse
-            @builder.build_model hash
+            content = @builder.build_model hash
+
+            write_source_file('model', hash['class'].name, content)
           end
         end
       end
