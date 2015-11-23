@@ -10,6 +10,11 @@ module RamlPoliglota
         (value.nil? || value.empty?)
       end
 
+      def up_first_letter(value)
+        return if value.nil?
+        "#{value[0].upcase}#{value[1, (value.size - 1)]}"
+      end
+
       def to_camel_case(value)
         text = value.split '_'
         if text.size == 1

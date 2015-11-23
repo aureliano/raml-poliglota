@@ -15,6 +15,12 @@ class StringHelperTest < Test::Unit::TestCase
     assert_false(string_empty? 'abc')
   end
 
+  def test_up_first_letter
+    assert_equal 'Test', up_first_letter('test')
+    assert_equal 'TestOne', up_first_letter('testOne')
+    assert_equal 'TestOne', up_first_letter('TestOne')
+  end
+
   def test_to_camel_case
     assert_equal 'ToCamelCase', to_camel_case('to_camel_case')
     assert_equal 'ToCamelCase', to_camel_case('ToCamelCase')
