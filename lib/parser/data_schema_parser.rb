@@ -41,6 +41,7 @@ module RamlPoliglota
                 a.type = value['type']
                 a.generic_type = up_first_letter value['schema']
                 a.visibility = 'private'
+                a.relationship = true
               end)
             end
           end
