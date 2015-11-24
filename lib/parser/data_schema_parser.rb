@@ -33,6 +33,18 @@ module RamlPoliglota
               a.visibility = 'private'
             end)
           end
+
+          unless hash['$linkedData'].nil?
+            hash['$linkedData'].each do |key, value|
+              c.add_method(MethodMeta.new do |m|
+                entity = up_first_letter key
+                m.visibility = 'public'
+                m.name = "fetch#{entity}"
+                m.return_type = entity
+                m.body = 'throw new RuntimeException("Method not implemented.");'
+              end)
+            end
+          end
         end
 
         hash['language'] = @language
