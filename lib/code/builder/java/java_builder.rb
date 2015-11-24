@@ -16,6 +16,7 @@ module RamlPoliglota
 
             clazz = hash['class']
             clazz.attributes.each do |attribute|
+              next unless attribute.relationship
               clazz.add_method _create_getter(attribute)
               clazz.add_method _create_setter(attribute)
               clazz.add_method _create_builder(clazz.name, attribute)
