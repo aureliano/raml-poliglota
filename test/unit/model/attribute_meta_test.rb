@@ -15,6 +15,7 @@ class AttributeMetaTest < Test::Unit::TestCase
     assert_nil attribute.final
     assert_nil attribute.init_vaule
     assert_nil attribute.default_value
+    assert_nil attribute.relationship
     
     attribute.name = 'name'
     assert_equal 'name', attribute.name
@@ -39,6 +40,9 @@ class AttributeMetaTest < Test::Unit::TestCase
     
     attribute.default_value = 'default_value'
     assert_equal 'default_value', attribute.default_value
+    
+    attribute.relationship = 'relationship'
+    assert_equal 'relationship', attribute.relationship
   end
 
   def test_equal

@@ -7,7 +7,7 @@ module RamlPoliglota
         yield self if block_given?
       end
 
-      attr_accessor :name, :type, :generic_type, :visibility, :static, :final, :init_vaule, :default_value
+      attr_accessor :name, :type, :generic_type, :visibility, :static, :final, :init_vaule, :default_value, :relationship
 
       def ==(obj)
         return false if (obj.nil? || !obj.instance_of?(AttributeMeta))
