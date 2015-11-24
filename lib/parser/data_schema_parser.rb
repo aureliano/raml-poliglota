@@ -36,12 +36,11 @@ module RamlPoliglota
 
           unless hash['$linkedData'].nil?
             hash['$linkedData'].each do |key, value|
-              c.add_method(MethodMeta.new do |m|
-                entity = up_first_letter key
-                m.visibility = 'public'
-                m.name = "fetch#{entity}"
-                m.return_type = entity
-                m.body = 'throw new RuntimeException("Method not implemented.");'
+              c.add_attribute(AttributeMeta.new do |a|
+                a.name = key
+                a.type = value['type']
+                a.generic_type = up_first_letter value['schema']
+                a.visibility = 'private'
               end)
             end
           end
