@@ -54,9 +54,14 @@ module RamlPoliglota
             return if clazz.attributes.nil?
             target << clazz.attributes.collect do |attribute|
               if attribute.relationship == true
-                attribute.type = ((attribute.type.downcase == 'collection') ? 'array' : attribute.generic_type)
+                if attribute.type.downcase == 'collection'
+                  attribute.type = 'array'
+                else
+                  attribute.type = attribute.generic_type
+                  attribute.generic_type = nil
+                end
               end
-              
+
               "#{write_java_attribute(attribute)}"
             end.join("\n")
           end

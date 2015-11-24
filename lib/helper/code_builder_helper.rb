@@ -26,6 +26,7 @@ module RamlPoliglota
 
       def write_java_attribute(attribute)
         type = js_to_java_type attribute.type
+        type = "#{type}<#{attribute.generic_type}>" unless attribute.generic_type.nil?
         write_code("#{attribute.visibility} #{type} #{attribute.name};", 1)
       end
 
