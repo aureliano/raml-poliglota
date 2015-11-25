@@ -79,5 +79,17 @@ class ClassMetaTest < Test::Unit::TestCase
     assert_equal 2, c.methods.size
     assert_equal 'method_2', c.methods[1].name
   end
+
+  def test_is_interface?
+    c = ClassMeta.new
+
+    assert_false c.is_interface?
+
+    c.is_interface = false
+    assert_false c.is_interface?
+    
+    c.is_interface = true
+    assert_true c.is_interface?
+  end
   
 end
