@@ -37,9 +37,14 @@ module RamlPoliglota
           unless hash['$linkedData'].nil?
             hash['$linkedData'].each do |key, value|
               c.add_attribute(AttributeMeta.new do |a|
+                if value['type'] == 'single'
+                  a.type = value['schema']
+                else
+                  a.type = 'array'
+                  a.generic_type = value['schema']
+                end
+
                 a.name = key
-                a.type = value['type']
-                a.generic_type = up_first_letter value['schema']
                 a.visibility = 'private'
                 a.relationship = true
               end)

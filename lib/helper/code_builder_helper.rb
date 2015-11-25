@@ -26,12 +26,14 @@ module RamlPoliglota
 
       def write_java_attribute(attribute)
         type = js_to_java_type attribute.type
-        type = "#{type}<#{attribute.generic_type}>" unless attribute.generic_type.nil?
+        type = "#{type}<#{js_to_java_type attribute.generic_type}>" unless attribute.generic_type.nil?
         write_code("#{attribute.visibility} #{type} #{attribute.name};", 1)
       end
 
       def write_java_method(method)
         type = ((method.return_type == 'void') ? 'void' :  js_to_java_type(method.return_type))
+        type = "#{type}<#{js_to_java_type method.generic_return_type}>" unless method.generic_return_type.nil?
+
         text = write_code("#{method.visibility} #{type} #{method.name}(", 1)
 
         unless method.parameters.nil?

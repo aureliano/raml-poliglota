@@ -7,6 +7,8 @@ module RamlPoliglota
 
         class JavaBuilder < CodeBuilder
 
+          include Helper::String
+
           def initialize
             @logger = AppLogger.create_logger self
           end
@@ -16,7 +18,10 @@ module RamlPoliglota
 
             clazz = hash['class']
             clazz.attributes.each do |attribute|
-              next if attribute.relationship
+              if attribute.relationship
+                clazz.add_method _create_fetcher(attribute)
+              end
+
               clazz.add_method _create_getter(attribute)
               clazz.add_method _create_setter(attribute)
               clazz.add_method _create_builder(clazz.name, attribute)
@@ -64,6 +69,18 @@ module RamlPoliglota
                 a.type = attribute.type
                 a.name = attribute.name
               end)
+            end
+          end
+
+          def _create_fetcher(attribute)
+            MethodMeta.new do |method|
+              @logger.debug "Create fetcher to relationship attribute #{attribute.name}"
+
+              method.visibility = 'public'
+              method.return_type = attribute.type
+              method.generic_return_type = up_first_letter attribute.generic_type
+              method.name = "fetch#{up_first_letter attribute.name}"
+              method.body = 'throw new RuntimeException("Method not implemented.");'
             end
           end
           
