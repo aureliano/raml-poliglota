@@ -6,7 +6,7 @@ module RamlPoliglota
         class JavaModelBuilder
 
           include RamlPoliglota::Helper::String
-          include RamlPoliglota::Helper::CodeBuilder
+          include RamlPoliglota::Helper::JavaCodeBuilder
 
           def initialize
             @logger = AppLogger.create_logger self
