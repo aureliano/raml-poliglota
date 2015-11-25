@@ -34,14 +34,16 @@ module RamlPoliglota
             end)
           end
 
-          unless hash['$linkedData'].nil?
-            hash['$linkedData'].each do |key, value|
+          unless hash['$relationship'].nil?
+            hash['$relationship'].each do |key, value|
               c.add_attribute(AttributeMeta.new do |a|
-                if value['type'] == 'single'
+                if value['type'] == '$single'
                   a.type = value['schema']
-                else
+                elsif value['type'] == '$collection'
                   a.type = 'array'
                   a.generic_type = value['schema']
+                else
+                  raise "Unsupported relationship type #{value['type']}. Expected one of [$single, $collection]"
                 end
 
                 a.name = key

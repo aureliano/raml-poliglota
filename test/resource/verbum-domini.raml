@@ -8,10 +8,10 @@ schemas:
       {  "$schema": "http://json-schema.org/draft-03/schema",
          "type": "object",
          "description": "Holy bible.",
-         "$linkedData": {
+         "$relationship": {
            "books": {
              "schema": "book",
-             "type": "collection",
+             "type": "$collection",
              "path": ["/bibles", "/{bibleId}", "/books"]
            }
          },
@@ -43,15 +43,15 @@ schemas:
       {  "$schema": "http://json-schema.org/draft-03/schema",
          "type": "object",
          "description": "Book within the Holy Bible.",
-         "$linkedData": {
+         "$relationship": {
            "chapters": {
              "schema": "chapter",
-             "type": "collection",
+             "type": "$collection",
              "path": ["/books", "/{bookId}", "/chapters"]
            },
            "bible": {
              "schema": "bible",
-             "type": "single",
+             "type": "$single",
              "path": ["/bibles", "/{bibleId}"]
            }
          },
@@ -77,15 +77,15 @@ schemas:
       {  "$schema": "http://json-schema.org/draft-03/schema",
          "type": "object",
          "description": "Chapter of a book.",
-         "$linkedData": {
+         "$relationship": {
            "verses": {
              "schema": "verse",
-             "type": "collection",
+             "type": "$collection",
              "path": ["/chapters", "/{chapterId}", "/verses"]
            },
            "book": {
              "schema": "book",
-             "type": "single",
+             "type": "$single",
              "path": ["/books", "/{bookId}"]
            }
          },
@@ -120,10 +120,10 @@ schemas:
       {  "$schema": "http://json-schema.org/draft-03/schema",
          "type": "object",
          "description": "Verse of a chapter.",
-         "$linkedData": {
+         "$relationship": {
            "chapter": {
              "schema": "chapter",
-             "type": "single",
+             "type": "$single",
              "path": ["/chapters", "/{chapterId}"]
            }
          },
