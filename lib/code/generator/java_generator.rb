@@ -22,10 +22,16 @@ module RamlPoliglota
           return if raml.nil?
           @logger.info 'Generate Java code.'
 
+          _generate_data_schema_interfaces
           _generate_data_schemas raml.schemas
         end
 
         private
+        def _generate_data_schema_interfaces
+          content = @builder.build_imodel @namespace
+          write_source_file('model', 'IModel', content)
+        end
+
         def _generate_data_schemas(schemas)
           return if schemas.nil? || schemas.empty?
           @logger.info ' > Generate Java Beans.'

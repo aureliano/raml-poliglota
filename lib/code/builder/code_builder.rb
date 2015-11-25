@@ -15,6 +15,10 @@ module RamlPoliglota
 
         attr_reader :builder
 
+        def build_imodel(namespace)
+          @builder.build_imodel namespace
+        end
+
         def build_model(hash)
           @builder.build_model hash
         end

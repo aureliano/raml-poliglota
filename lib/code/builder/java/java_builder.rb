@@ -13,6 +13,17 @@ module RamlPoliglota
             @logger = AppLogger.create_logger self
           end
 
+          def build_imodel(namespace)
+            clazz = ClassMeta.new do |c|
+              c.namespace = namespace
+              c.is_interface = true
+              c.name = 'IModel'
+              c.documentation = 'Define a type to API data schema models.'
+            end
+
+            JavaInterfaceModelBuilder.new.build clazz
+          end
+
           def build_model(hash)
             return if hash.nil?
 
