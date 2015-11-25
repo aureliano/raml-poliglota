@@ -2,8 +2,8 @@ require 'test/unit'
 require File.expand_path '../../../test_helper.rb', __FILE__
 require File.expand_path '../../../../lib/model/attribute_meta.rb', __FILE__
 require File.expand_path '../../../../lib/model/method_meta.rb', __FILE__
-require File.expand_path '../../../../lib/helper/code_builder_helper.rb', __FILE__
 require File.expand_path '../../../../lib/helper/string_helper.rb', __FILE__
+require File.expand_path '../../../../lib/helper/code_builder_helper.rb', __FILE__
 
 class CodeBuilderHelperTest < Test::Unit::TestCase
 
