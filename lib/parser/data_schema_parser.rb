@@ -24,7 +24,8 @@ module RamlPoliglota
           c.name = send("to_#{@language.case}_case", @entity_name)
           c.documentation = hash['description']
 
-          next if hash['properties'].nil?
+          raise "Data schema '#{@entity_name}' doesn't have the 'properties' hash defined." if hash['properties'].nil?
+          raise "The data schema #{@entity_name}'s attribute 'properties' must be of type Hash." unless hash['properties'].instance_of? Hash
           
           hash['properties'].each do |key, value|
             c.add_attribute(AttributeMeta.new do |a|
@@ -33,6 +34,8 @@ module RamlPoliglota
               a.visibility = 'private'
             end)
           end
+
+          c.attributes ||= []
 
           unless hash['$relationship'].nil?
             hash['$relationship'].each do |key, value|

@@ -21,10 +21,9 @@ module RamlPoliglota
             _write_documentation clazz, text
             _write_class_definition clazz, text
             _write_attributes clazz, text
-            text << "\n\n"
             _write_methods clazz, text
 
-            text << "\n}"
+            text << "}"
           end
 
           private
@@ -42,7 +41,7 @@ module RamlPoliglota
             text << " */"
 
             target << write_code(text, 0)
-            target << "\n\n"
+            target << "\n"
           end
 
           def _write_class_definition(clazz, target)
@@ -51,17 +50,19 @@ module RamlPoliglota
           end
 
           def _write_attributes(clazz, target)
-            return if clazz.attributes.nil?
+            return if clazz.attributes.empty?
             target << clazz.attributes.collect do |attribute|
               "#{write_java_attribute(attribute)}"
             end.join("\n")
+            target << "\n\n"
           end
 
           def _write_methods(clazz, target)
-            return if clazz.methods.nil?
+            return if clazz.methods.empty?
             target << clazz.methods.collect do |method|
               write_java_method(method)
             end.join("\n\n")
+            target << "\n"
           end
 
         end

@@ -27,6 +27,7 @@ module RamlPoliglota
               clazz.add_method _create_builder(clazz.name, attribute)
             end
 
+            clazz.methods ||= []
             JavaModelBuilder.new.build clazz
           end
 

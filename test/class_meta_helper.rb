@@ -108,7 +108,6 @@ package br.mg.gv;
  *
  * A Java Bean class.
  */
-
 public class #{name} {
 
   private Integer id;

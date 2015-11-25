@@ -16,7 +16,7 @@ class DataSchemaParserTest < Test::Unit::TestCase
     parser.entity_name = 'BibleBean'
     assert_raise(RuntimeError) { parser.parse }
 
-    parser.data_schema = '{}'
+    parser.data_schema = '{"properties": {}}'
     assert_raise(RuntimeError) { parser.parse }
 
     parser.language = SUPPORTED_PROGRAMMING_LANGUAGES[:java]
