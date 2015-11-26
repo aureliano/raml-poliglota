@@ -13,7 +13,7 @@ class AttributeMetaTest < Test::Unit::TestCase
     assert_nil attribute.visibility
     assert_nil attribute.static
     assert_nil attribute.final
-    assert_nil attribute.init_vaule
+    assert_nil attribute.init_value
     assert_nil attribute.default_value
     assert_nil attribute.relationship
     
@@ -35,8 +35,8 @@ class AttributeMetaTest < Test::Unit::TestCase
     attribute.final = 'final'
     assert_equal 'final', attribute.final
     
-    attribute.init_vaule = 'init_vaule'
-    assert_equal 'init_vaule', attribute.init_vaule
+    attribute.init_value = 'init_value'
+    assert_equal 'init_value', attribute.init_value
     
     attribute.default_value = 'default_value'
     assert_equal 'default_value', attribute.default_value
