@@ -14,6 +14,7 @@ class ClassMetaTest < Test::Unit::TestCase
     assert_nil clazz.methods
     assert_nil clazz.interfaces
     assert_nil clazz.is_interface
+    assert_nil clazz.generics
     
     clazz.name = 'name'
     assert_equal 'name', clazz.name
@@ -35,6 +36,9 @@ class ClassMetaTest < Test::Unit::TestCase
     
     clazz.is_interface = true
     assert_true clazz.is_interface
+    
+    clazz.generics = 'generics'
+    assert_equal 'generics', clazz.generics
   end
 
   def test_equal
