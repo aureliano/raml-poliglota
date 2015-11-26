@@ -35,6 +35,7 @@ def _create_class_meta_interface_collection_model
     c.name = 'ICollectionModel'
     c.documentation = 'Define a type to API data schema collection models.'
     c.is_interface = true
+    c.generics = "T extends IModel"
 
     c.add_method(MethodMeta.new do |m|
       m.visibility = 'public'
@@ -62,7 +63,7 @@ package br.mg.gv;
  *
  * Define a type to API data schema collection models.
  */
-public interface ICollectionModel<T extends IModel > {
+public interface ICollectionModel<T extends IModel> {
 
   public abstract List<T> getElements();
 
