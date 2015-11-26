@@ -39,8 +39,8 @@ def _create_class_meta_interface_collection_model
     c.add_method(MethodMeta.new do |m|
       m.visibility = 'public'
       m.name = 'getElements'
-      m.return_type = 'java.util.List'
-      m.return_generic_type = 'T'
+      m.return_type = 'List'
+      m.generic_return_type = 'T'
     end)
 
     c.add_method(MethodMeta.new do |m|
@@ -227,6 +227,10 @@ CLASS_META_FACTORY = {
   :imodel => {
     :object => _create_class_meta_interface_model,
     :text => _create_text_class_interface_model
+  },
+  :icollection_model => {
+    :object => _create_class_meta_interface_collection_model,
+    :text => _create_text_class_interface_collection_model
   },
   :model => {
     :bilbo_baggins => {
