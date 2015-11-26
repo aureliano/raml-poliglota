@@ -68,6 +68,14 @@ module RamlPoliglota
         target << "\n\n"
       end
 
+      def append_attributes(clazz, target)
+        return if clazz.attributes.empty?
+        target << clazz.attributes.collect do |attribute|
+          "#{write_java_attribute(attribute)}"
+        end.join("\n")
+        target << "\n\n"
+      end
+
     end
   end
 end
