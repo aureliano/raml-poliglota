@@ -52,6 +52,17 @@ class JavaCodeBuilderHelperTest < Test::Unit::TestCase
     end)
 
     assert_equal "  public void setId(Integer id) {\n    this.id = id;\n  }", text
+
+    text = write_java_method(MethodMeta.new do |m|
+      m.visibility = 'public'
+      m.static = true
+      m.final = true
+      m.return_type = 'void'
+      m.name = 'doSomething'
+      m.body = '// Do something'
+    end)
+
+    assert_equal "  public static final void doSomething() {\n    // Do something\n  }", text
   end
 
   def test_js_to_java_type

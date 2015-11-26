@@ -11,10 +11,14 @@ module RamlPoliglota
       end
 
       def write_java_method(method)
+        text = method.visibility
+        text << " static" if method.static == true
+        text << " final" if method.final == true
+
         type = ((method.return_type == 'void') ? 'void' :  js_to_java_type(method.return_type))
         type = "#{type}<#{js_to_java_type method.generic_return_type}>" unless method.generic_return_type.nil?
 
-        text = write_code("#{method.visibility} #{type} #{method.name}(", 1)
+        text = write_code("#{text} #{type} #{method.name}(", 1)
 
         unless method.parameters.nil?
           params = method.parameters.collect do |p|
