@@ -136,6 +136,12 @@ class JavaCodeBuilderHelperTest < Test::Unit::TestCase
 
     append_class_definition clazz, target
     assert_equal "public interface IModel {\n\n", target
+
+    target = ''
+    clazz = clazz.dup
+    clazz.generics = 'T extends AnyInterface'
+    append_class_definition clazz, target
+    assert_equal "public interface IModel<T extends AnyInterface> {\n\n", target
   end
 
   def test_append_attributes
