@@ -17,7 +17,7 @@ module RamlPoliglota
 
             @logger.debug "Write model class #{clazz.namespace}.#{clazz.name}"
             text = ''
-            _write_namespace clazz, text
+            append_package clazz, text
             _write_documentation clazz, text
             _write_class_definition clazz, text
             _write_attributes clazz, text
@@ -27,11 +27,6 @@ module RamlPoliglota
           end
 
           private
-          def _write_namespace(clazz, target)
-            return if string_empty? clazz.namespace
-            target << write_code("package #{clazz.namespace};\n\n", 0)
-          end
-
           def _write_documentation(clazz, target)
             text = []
             text << "/**"

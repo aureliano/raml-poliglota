@@ -24,11 +24,6 @@ module RamlPoliglota
           end
 
           private
-          def _write_namespace(clazz, target)
-            return if string_empty? clazz.namespace
-            target << write_code("package #{clazz.namespace};\n\n", 0)
-          end
-
           def _write_documentation(clazz, target)
             text = []
             text << "/**"
