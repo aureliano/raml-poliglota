@@ -15,7 +15,7 @@ class MethodMetaTest < Test::Unit::TestCase
     assert_nil method.final
     assert_nil method.parameters
     assert_nil method.body
-    assert_nil method.is_abstract
+    assert_nil method.abstract
     
     method.name = 'name'
     assert_equal 'name', method.name
@@ -41,8 +41,8 @@ class MethodMetaTest < Test::Unit::TestCase
     method.body = 'body'
     assert_equal 'body', method.body
     
-    method.is_abstract = true
-    assert_true method.is_abstract
+    method.abstract = true
+    assert_true method.abstract
   end
 
   def test_equal
@@ -96,10 +96,10 @@ class MethodMetaTest < Test::Unit::TestCase
 
     assert_false m.is_abstract?
 
-    m.is_abstract = false
+    m.abstract = false
     assert_false m.is_abstract?
     
-    m.is_abstract = true
+    m.abstract = true
     assert_true m.is_abstract?
   end
   
