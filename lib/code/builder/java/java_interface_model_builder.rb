@@ -42,7 +42,8 @@ module RamlPoliglota
           end
 
           def _write_class_definition(clazz, target)
-            target << write_code("public class #{clazz.name} {", 0)
+            definition = ((clazz.is_interface?) ? 'interface' : 'class')
+            target << write_code("public #{definition} #{clazz.name} {", 0)
             target << "\n\n"
           end
 

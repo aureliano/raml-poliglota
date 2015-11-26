@@ -17,6 +17,16 @@ class CodeBuilderTest < Test::Unit::TestCase
     assert_true code_builder.builder.instance_of? JavaBuilder
   end
 
+  def test_build_imodel
+    builder = CodeBuilder.new SUPPORTED_PROGRAMMING_LANGUAGES[:java]
+    clazz = CLASS_META_FACTORY[:imodel][:object]
+
+    expected = CLASS_META_FACTORY[:imodel][:text]
+    actual = builder.build_imodel clazz.namespace
+
+    assert_equal expected, actual
+  end
+
   def test_build_model
     builder = CodeBuilder.new SUPPORTED_PROGRAMMING_LANGUAGES[:java]
     
