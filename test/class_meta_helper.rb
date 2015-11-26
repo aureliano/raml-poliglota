@@ -41,12 +41,14 @@ def _create_class_meta_interface_collection_model
       m.name = 'getElements'
       m.return_type = 'List'
       m.generic_return_type = 'T'
+      m.abstract = true
     end)
 
     c.add_method(MethodMeta.new do |m|
       m.visibility = 'public'
       m.name = 'getSize'
       m.return_type = 'Integer'
+      m.abstract = true
     end)
   end
 end
@@ -62,9 +64,9 @@ package br.mg.gv;
  */
 public interface ICollectionModel {
 
-  public List<T> getElements();
+  public abstract List<T> getElements();
 
-  public Integer getSize();
+  public abstract Integer getSize();
 }
 FIN
   text.rstrip
