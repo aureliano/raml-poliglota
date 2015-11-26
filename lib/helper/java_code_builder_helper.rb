@@ -5,9 +5,16 @@ module RamlPoliglota
       include CodeBuilder
 
       def write_java_attribute(attribute)
+        text = attribute.visibility.dup
+        text << " static" if attribute.static == true
+        text << " final" if attribute.final == true
+
         type = js_to_java_type attribute.type
         type = "#{type}<#{js_to_java_type attribute.generic_type}>" unless attribute.generic_type.nil?
-        write_code("#{attribute.visibility} #{type} #{attribute.name};", 1)
+
+        init = " = #{attribute.init_value}" unless attribute.init_value.nil?
+
+        write_code("#{text} #{type} #{attribute.name}#{init};", 1)
       end
 
       def write_java_method(method)

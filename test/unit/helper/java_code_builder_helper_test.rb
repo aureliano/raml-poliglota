@@ -28,6 +28,17 @@ class JavaCodeBuilderHelperTest < Test::Unit::TestCase
     end)
 
     assert_equal '  protected String name;', text
+
+    text = write_java_attribute(AttributeMeta.new do |a|
+      a.visibility = 'public'
+      a.static = true
+      a.final = true
+      a.type = 'String'
+      a.name = 'name'
+      a.init_value = '"INITIAL_VALUE"'
+    end)
+
+    assert_equal '  public static final String name = "INITIAL_VALUE";', text
   end
 
   def test_write_java_method
