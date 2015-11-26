@@ -19,7 +19,7 @@ module RamlPoliglota
             text = ''
             append_package clazz, text
             append_javadoc clazz, text
-            _write_class_definition clazz, text
+            append_class_definition clazz, text
             _write_attributes clazz, text
             _write_methods clazz, text
 
@@ -27,11 +27,6 @@ module RamlPoliglota
           end
 
           private
-          def _write_class_definition(clazz, target)
-            target << write_code("public class #{clazz.name} {", 0)
-            target << "\n\n"
-          end
-
           def _write_attributes(clazz, target)
             return if clazz.attributes.empty?
             target << clazz.attributes.collect do |attribute|

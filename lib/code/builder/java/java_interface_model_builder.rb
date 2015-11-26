@@ -18,16 +18,9 @@ module RamlPoliglota
             text = ''
             append_package clazz, text
             append_javadoc clazz, text
-            _write_class_definition clazz, text
+            append_class_definition clazz, text
 
             text << "}"
-          end
-
-          private
-          def _write_class_definition(clazz, target)
-            definition = ((clazz.is_interface?) ? 'interface' : 'class')
-            target << write_code("public #{definition} #{clazz.name} {", 0)
-            target << "\n\n"
           end
 
         end

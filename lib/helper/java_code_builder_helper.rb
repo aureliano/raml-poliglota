@@ -62,6 +62,12 @@ module RamlPoliglota
         target << "\n"
       end
 
+      def append_class_definition(clazz, target)
+        definition = ((clazz.is_interface?) ? 'interface' : 'class')
+        target << write_code("public #{definition} #{clazz.name} {", 0)
+        target << "\n\n"
+      end
+
     end
   end
 end
