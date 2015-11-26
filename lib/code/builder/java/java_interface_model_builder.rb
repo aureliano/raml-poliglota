@@ -16,7 +16,7 @@ module RamlPoliglota
 
             @logger.debug "Write interface model class #{clazz.namespace}.#{clazz.name}"
             text = ''
-            _write_namespace clazz, text
+            append_package clazz, text
             _write_documentation clazz, text
             _write_class_definition clazz, text
 

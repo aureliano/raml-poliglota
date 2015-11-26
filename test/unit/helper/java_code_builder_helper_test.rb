@@ -2,6 +2,7 @@ require 'test/unit'
 require File.expand_path '../../../test_helper.rb', __FILE__
 require File.expand_path '../../../../lib/model/attribute_meta.rb', __FILE__
 require File.expand_path '../../../../lib/model/method_meta.rb', __FILE__
+require File.expand_path '../../../../lib/model/class_meta.rb', __FILE__
 require File.expand_path '../../../../lib/helper/string_helper.rb', __FILE__
 require File.expand_path '../../../../lib/helper/code_builder_helper.rb', __FILE__
 require File.expand_path '../../../../lib/helper/java_code_builder_helper.rb', __FILE__
@@ -65,6 +66,14 @@ class JavaCodeBuilderHelperTest < Test::Unit::TestCase
     assert_equal 'java.util.List', js_to_java_type('array')
     assert_equal 'Object', js_to_java_type('object')
     assert_equal 'FrodoBaggins', js_to_java_type('frodoBaggins')
+  end
+
+  def test_append_package
+    clazz = CLASS_META_FACTORY[:model][:bilbo_baggins][:object]
+    target = ''
+
+    append_package(clazz, target)
+    assert_equal "package br.mg.gv;\n\n", target
   end
 
 end

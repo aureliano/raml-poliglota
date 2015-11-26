@@ -45,6 +45,11 @@ module RamlPoliglota
         end
       end
 
+      def append_package(clazz, target)
+        return if string_empty? clazz.namespace
+        target << write_code("package #{clazz.namespace};\n\n", 0)
+      end
+
     end
   end
 end
