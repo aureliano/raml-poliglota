@@ -30,6 +30,9 @@ module RamlPoliglota
         def _generate_data_schema_interfaces
           content = @builder.build_imodel @namespace
           write_source_file('model', 'IModel', content)
+
+          content = @builder.build_icollection_model @namespace
+          write_source_file('model', 'ICollectionModel', content)
         end
 
         def _generate_data_schemas(schemas)

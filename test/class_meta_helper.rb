@@ -40,7 +40,7 @@ def _create_class_meta_interface_collection_model
     c.add_method(MethodMeta.new do |m|
       m.visibility = 'public'
       m.name = 'getElements'
-      m.return_type = 'List'
+      m.return_type = 'array'
       m.generic_return_type = 'T'
       m.abstract = true
     end)
@@ -65,7 +65,7 @@ package br.mg.gv;
  */
 public interface ICollectionModel<T extends IModel> {
 
-  public abstract List<T> getElements();
+  public abstract java.util.List<T> getElements();
 
   public abstract Integer getSize();
 }

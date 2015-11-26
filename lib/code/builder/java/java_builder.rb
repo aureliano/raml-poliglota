@@ -35,7 +35,7 @@ module RamlPoliglota
               c.add_method(MethodMeta.new do |m|
                 m.visibility = 'public'
                 m.name = 'getElements'
-                m.return_type = 'List'
+                m.return_type = 'array'
                 m.generic_return_type = 'T'
                 m.abstract = true
               end)
