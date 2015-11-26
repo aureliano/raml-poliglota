@@ -98,4 +98,12 @@ class JavaCodeBuilderHelperTest < Test::Unit::TestCase
     assert_equal "public interface IModel {\n\n", target
   end
 
+  def test_append_attributes
+    clazz = CLASS_META_FACTORY[:model][:frodo_baggins][:object]
+    target = ''
+
+    append_attributes clazz, target
+    assert_equal "  private Integer id;\n  protected String firstName;\n  protected String lastName;\n\n", target
+  end
+
 end
