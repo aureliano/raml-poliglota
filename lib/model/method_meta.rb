@@ -7,7 +7,7 @@ module RamlPoliglota
         yield self if block_given?
       end
 
-      attr_accessor :name, :return_type, :generic_return_type, :visibility, :static, :final, :parameters, :body
+      attr_accessor :name, :return_type, :generic_return_type, :visibility, :static, :final, :parameters, :body, :is_abstract
 
       def ==(obj)
         return false if (obj.nil? || !obj.instance_of?(MethodMeta))
@@ -21,6 +21,10 @@ module RamlPoliglota
       def add_parameter(parameter)
         @parameters ||= []
         @parameters << parameter
+      end
+
+      def is_abstract?
+        ((@is_abstract.nil?) ? false : is_abstract)
       end
 
     end

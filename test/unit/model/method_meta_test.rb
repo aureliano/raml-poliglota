@@ -6,39 +6,43 @@ class MethodMetaTest < Test::Unit::TestCase
   include RamlPoliglota::Model
   
   def test_initialization
-    attribute = MethodMeta.new
-    assert_nil attribute.name
-    assert_nil attribute.return_type
-    assert_nil attribute.generic_return_type
-    assert_nil attribute.visibility
-    assert_nil attribute.static
-    assert_nil attribute.final
-    assert_nil attribute.parameters
-    assert_nil attribute.body
+    method = MethodMeta.new
+    assert_nil method.name
+    assert_nil method.return_type
+    assert_nil method.generic_return_type
+    assert_nil method.visibility
+    assert_nil method.static
+    assert_nil method.final
+    assert_nil method.parameters
+    assert_nil method.body
+    assert_nil method.is_abstract
     
-    attribute.name = 'name'
-    assert_equal 'name', attribute.name
+    method.name = 'name'
+    assert_equal 'name', method.name
     
-    attribute.return_type = 'return_type'
-    assert_equal 'return_type', attribute.return_type
+    method.return_type = 'return_type'
+    assert_equal 'return_type', method.return_type
     
-    attribute.generic_return_type = 'generic_return_type'
-    assert_equal 'generic_return_type', attribute.generic_return_type
+    method.generic_return_type = 'generic_return_type'
+    assert_equal 'generic_return_type', method.generic_return_type
     
-    attribute.visibility = 'visibility'
-    assert_equal 'visibility', attribute.visibility
+    method.visibility = 'visibility'
+    assert_equal 'visibility', method.visibility
     
-    attribute.static = 'static'
-    assert_equal 'static', attribute.static
+    method.static = 'static'
+    assert_equal 'static', method.static
     
-    attribute.final = 'final'
-    assert_equal 'final', attribute.final
+    method.final = 'final'
+    assert_equal 'final', method.final
     
-    attribute.parameters = [AttributeMeta.new { |a| a.name = 'test' }]
-    assert_equal [AttributeMeta.new { |a| a.name = 'test' }], attribute.parameters
+    method.parameters = [AttributeMeta.new { |a| a.name = 'test' }]
+    assert_equal [AttributeMeta.new { |a| a.name = 'test' }], method.parameters
     
-    attribute.body = 'body'
-    assert_equal 'body', attribute.body
+    method.body = 'body'
+    assert_equal 'body', method.body
+    
+    method.is_abstract = true
+    assert_true method.is_abstract
   end
 
   def test_equal
@@ -85,6 +89,18 @@ class MethodMetaTest < Test::Unit::TestCase
     m.add_parameter(AttributeMeta.new { |a| a.name = 'field_2' })
     assert_equal 2, m.parameters.size
     assert_equal 'field_2', m.parameters[1].name
+  end
+
+  def test_is_abstract?
+    m = MethodMeta.new
+
+    assert_false m.is_abstract?
+
+    m.is_abstract = false
+    assert_false m.is_abstract?
+    
+    m.is_abstract = true
+    assert_true m.is_abstract?
   end
   
 end
