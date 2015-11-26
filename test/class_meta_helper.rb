@@ -9,6 +9,7 @@ def _create_class_meta_interface_model
     c.namespace = 'br.mg.gv'
     c.name = 'IModel'
     c.documentation = 'Define a type to API data schema models.'
+    c.is_interface = true
   end
 end
 

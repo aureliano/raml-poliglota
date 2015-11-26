@@ -7,15 +7,15 @@ require File.expand_path '../../../../../../lib/code/builder/java/java_model_bui
 
 class JavaInterfaceModelBuilderTest < Test::Unit::TestCase
   
-  include RamlPoliglota::Code::Builder
+  include RamlPoliglota::Code::Builder::Java
   include RamlPoliglota::Model
 
   def test_build
-    builder = CodeBuilder.new SUPPORTED_PROGRAMMING_LANGUAGES[:java]
+    builder = JavaInterfaceModelBuilder.new
     clazz = CLASS_META_FACTORY[:imodel][:object]
 
     expected = CLASS_META_FACTORY[:imodel][:text]
-    actual = builder.build_imodel clazz.namespace
+    actual = builder.build clazz
 
     assert_equal expected, actual
   end
