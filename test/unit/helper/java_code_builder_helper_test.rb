@@ -63,6 +63,24 @@ class JavaCodeBuilderHelperTest < Test::Unit::TestCase
     end)
 
     assert_equal "  public static final void doSomething() {\n    // Do something\n  }", text
+
+    m = MethodMeta.new do |m|
+      m.visibility = 'public'
+      m.abstract = true
+      m.return_type = 'void'
+      m.name = 'doSomething'
+      m.body = '// Do something'
+    end
+    text = write_java_method m
+    assert_equal "  public abstract void doSomething();", text
+
+    m.add_parameter(AttributeMeta.new do |a|
+      a.type = 'Integer'
+      a.name = 'param'
+    end)
+
+    text = write_java_method m
+    assert_equal "  public abstract void doSomething(Integer param);", text
   end
 
   def test_js_to_java_type

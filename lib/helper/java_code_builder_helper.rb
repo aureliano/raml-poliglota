@@ -11,9 +11,13 @@ module RamlPoliglota
       end
 
       def write_java_method(method)
-        text = method.visibility
-        text << " static" if method.static == true
-        text << " final" if method.final == true
+        text = method.visibility.dup
+        if method.is_abstract?
+          text << ' abstract'
+        else
+          text << " static" if method.static == true
+          text << " final" if method.final == true
+        end
 
         type = ((method.return_type == 'void') ? 'void' :  js_to_java_type(method.return_type))
         type = "#{type}<#{js_to_java_type method.generic_return_type}>" unless method.generic_return_type.nil?
@@ -26,6 +30,10 @@ module RamlPoliglota
             "#{type} #{p.name}"
           end.join(", ")
           text << write_code(params, 0)
+        end
+
+        if method.is_abstract?
+          return text << ');'
         end
 
         text << ") {\n"
