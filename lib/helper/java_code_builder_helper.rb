@@ -76,6 +76,14 @@ module RamlPoliglota
         target << "\n\n"
       end
 
+      def append_methods(clazz, target)
+        return if clazz.methods.empty?
+        target << clazz.methods.collect do |method|
+          write_java_method(method)
+        end.join("\n\n")
+        target << "\n"
+      end
+
     end
   end
 end

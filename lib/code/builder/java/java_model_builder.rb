@@ -21,18 +21,9 @@ module RamlPoliglota
             append_javadoc clazz, text
             append_class_definition clazz, text
             append_attributes clazz, text
-            _write_methods clazz, text
+            append_methods clazz, text
 
             text << "}"
-          end
-
-          private
-          def _write_methods(clazz, target)
-            return if clazz.methods.empty?
-            target << clazz.methods.collect do |method|
-              write_java_method(method)
-            end.join("\n\n")
-            target << "\n"
           end
 
         end

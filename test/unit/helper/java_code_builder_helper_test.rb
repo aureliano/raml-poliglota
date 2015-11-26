@@ -106,4 +106,51 @@ class JavaCodeBuilderHelperTest < Test::Unit::TestCase
     assert_equal "  private Integer id;\n  protected String firstName;\n  protected String lastName;\n\n", target
   end
 
+  def test_append_methods
+    clazz = CLASS_META_FACTORY[:model][:frodo_baggins][:object]
+    target = ''
+    expected = <<-FIN
+  public Integer getId() {
+    return this.id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public BilboBaggins withId(Integer id) {
+    this.id = id;
+    return this;
+  }
+
+  public String getFirstName() {
+    return this.firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public BilboBaggins withFirstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
+
+  public String getLastName() {
+    return this.lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public BilboBaggins withLastName(String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
+FIN
+    append_methods clazz, target
+    assert_equal expected, target
+  end
+
 end
