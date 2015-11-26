@@ -24,6 +24,33 @@ module RamlPoliglota
             JavaInterfaceModelBuilder.new.build clazz
           end
 
+          def build_icollection_model(namespace)
+            clazz = ClassMeta.new do |c|
+              c.namespace = namespace
+              c.is_interface = true
+              c.name = 'ICollectionModel'
+              c.documentation = 'Define a type to API data schema collection models.'
+              c.generics = 'T extends IModel'
+
+              c.add_method(MethodMeta.new do |m|
+                m.visibility = 'public'
+                m.name = 'getElements'
+                m.return_type = 'List'
+                m.generic_return_type = 'T'
+                m.abstract = true
+              end)
+
+              c.add_method(MethodMeta.new do |m|
+                m.visibility = 'public'
+                m.name = 'getSize'
+                m.return_type = 'Integer'
+                m.abstract = true
+              end)
+            end
+
+            JavaInterfaceCollectionModelBuilder.new.build clazz
+          end
+
           def build_model(hash)
             return if hash.nil?
 

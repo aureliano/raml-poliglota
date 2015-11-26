@@ -19,6 +19,10 @@ module RamlPoliglota
           @builder.build_imodel namespace
         end
 
+        def build_icollection_model(namespace)
+          @builder.build_icollection_model namespace
+        end
+
         def build_model(hash)
           @builder.build_model hash
         end

@@ -22,4 +22,24 @@ class JavaBuilderTest < Test::Unit::TestCase
     assert_equal expected, actual
   end
 
+  def test_build_imodel
+    builder = JavaBuilder.new
+    clazz = CLASS_META_FACTORY[:imodel][:object]
+
+    expected = CLASS_META_FACTORY[:imodel][:text]
+    actual = builder.build_imodel clazz.namespace
+
+    assert_equal expected, actual
+  end
+
+  def test_build_icollection_model
+    builder = JavaBuilder.new
+    clazz = CLASS_META_FACTORY[:icollection_model][:object]
+
+    expected = CLASS_META_FACTORY[:icollection_model][:text]
+    actual = builder.build_icollection_model clazz.namespace
+
+    assert_equal expected, actual
+  end
+
 end
