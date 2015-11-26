@@ -5,7 +5,7 @@ require File.expand_path '../../../../../../lib/configuration/app_logger.rb', __
 require File.expand_path '../../../../../../lib/model/class_meta.rb', __FILE__
 require File.expand_path '../../../../../../lib/code/builder/java/java_model_builder.rb', __FILE__
 
-class JavaBuilderTest < Test::Unit::TestCase
+class JavaModelBuilderTest < Test::Unit::TestCase
   
   include RamlPoliglota::Code::Builder::Java
   include RamlPoliglota::Model
