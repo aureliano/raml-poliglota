@@ -62,7 +62,7 @@ package br.mg.gv;
  *
  * Define a type to API data schema collection models.
  */
-public interface ICollectionModel {
+public interface ICollectionModel<T extends IModel > {
 
   public abstract List<T> getElements();
 
