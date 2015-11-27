@@ -19,7 +19,17 @@ module RamlPoliglota
         
         hash = JSON.parse @data_schema
 
-        clazz = ClassMeta.new do |c|
+        clazz = _create_class_object hash
+
+        hash['language'] = @language
+        hash['class'] = clazz
+
+        hash
+      end
+
+      private
+      def _create_class_object(hash)
+        ClassMeta.new do |c|
           c.namespace = @namespace
           c.name = send("to_#{@language.case}_case", @entity_name)
           c.documentation = hash['description']
@@ -31,14 +41,8 @@ module RamlPoliglota
           _add_properties hash, c
           _add_relationship hash, c
         end
-
-        hash['language'] = @language
-        hash['class'] = clazz
-
-        hash
       end
 
-      private
       def _add_properties(hash, c)
         hash['properties'].each do |key, value|
           c.add_attribute(AttributeMeta.new do |a|
