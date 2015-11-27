@@ -14,14 +14,7 @@ module RamlPoliglota
           end
 
           def build_imodel(namespace)
-            clazz = ClassMeta.new do |c|
-              c.namespace = namespace
-              c.is_interface = true
-              c.name = 'IModel'
-              c.documentation = 'Define a type to API data schema models.'
-            end
-
-            JavaInterfaceModelBuilder.new.build clazz
+            JavaInterfaceModelBuilder.new.build namespace
           end
 
           def build_icollection_model(namespace)
@@ -136,7 +129,7 @@ module RamlPoliglota
               method.body = 'throw new RuntimeException("Method not implemented.");'
             end
           end
-          
+
           def _create_get_size(clazz)
             size = clazz.attributes.select { |a| a.name == 'size' }.first
 

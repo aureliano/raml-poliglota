@@ -11,9 +11,19 @@ module RamlPoliglota
             @logger = AppLogger.create_logger self
           end
 
-          def build(clazz)
-            return if clazz.nil?
+          def build(namespace)
+            clazz = ClassMeta.new do |c|
+              c.namespace = namespace
+              c.is_interface = true
+              c.name = 'IModel'
+              c.documentation = 'Define a type to API data schema models.'
+            end
 
+            _build_class clazz
+          end
+
+          private
+          def _build_class(clazz)
             @logger.debug "Write interface model class #{clazz.namespace}.#{clazz.name}"
             text = ''
             append_package clazz, text
