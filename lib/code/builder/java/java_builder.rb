@@ -76,6 +76,7 @@ module RamlPoliglota
 
               method.visibility = 'public'
               method.return_type = attribute.type
+              method.generic_return_type = up_first_letter attribute.generic_type
               method.name = "get#{attribute.name[0].upcase}#{attribute.name[1, (attribute.name.size - 1)]}"
               method.body = "return this.#{attribute.name};"
             end
@@ -91,6 +92,7 @@ module RamlPoliglota
               method.body = "this.#{attribute.name} = #{attribute.name};"
               method.add_parameter(AttributeMeta.new do |a|
                 a.type = attribute.type
+                a.generic_type = attribute.generic_type
                 a.name = attribute.name
               end)
             end
@@ -106,6 +108,7 @@ module RamlPoliglota
               method.body = "this.#{attribute.name} = #{attribute.name};\nreturn this;"
               method.add_parameter(AttributeMeta.new do |a|
                 a.type = attribute.type
+                a.generic_type = attribute.generic_type
                 a.name = attribute.name
               end)
             end
