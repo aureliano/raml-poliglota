@@ -13,7 +13,7 @@ module RamlPoliglota
 
           def build(namespace)
             clazz = ClassMeta.new do |c|
-              c.namespace = namespace
+              c.namespace = "#{namespace}.model"
               c.is_interface = true
               c.name = 'ICollectionModel'
               c.documentation = 'Define a type to API data schema collection models.'

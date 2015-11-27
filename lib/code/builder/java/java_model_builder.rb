@@ -37,7 +37,8 @@ module RamlPoliglota
           def _configure_class_object(clazz)
             clazz.attributes ||= []
             clazz.methods ||= []
-
+            clazz.namespace = "#{clazz.namespace}.model"
+            
             clazz.attributes.each do |attribute|
               if attribute.relationship
                 clazz.add_method _create_fetcher(attribute)
