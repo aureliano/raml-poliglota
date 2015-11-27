@@ -15,7 +15,7 @@ class JavaInterfaceCollectionModelBuilderTest < Test::Unit::TestCase
     clazz = CLASS_META_FACTORY[:icollection_model][:object]
 
     expected = CLASS_META_FACTORY[:icollection_model][:text]
-    actual = builder.build clazz
+    actual = builder.build clazz.namespace
 
     assert_equal expected, actual
   end
