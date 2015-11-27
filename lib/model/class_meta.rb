@@ -28,7 +28,7 @@ module RamlPoliglota
 
       def add_interface(interface)
         @interfaces ||= []
-        @interfaces << interface
+        @interfaces << interface unless @interfaces.include?(interface)
       end
 
       def is_interface?
