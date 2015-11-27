@@ -53,7 +53,7 @@ module RamlPoliglota
             if attribute.nil?
               clazz.add_interface 'IModel'
             else
-              clazz.add_interface 'ICollectionModel<IModel>'
+              clazz.add_interface "ICollectionModel<#{to_camel_case attribute.generic_type}>"
               get_size = _create_get_size clazz
               clazz.methods.delete get_size
               clazz.add_method get_size
