@@ -30,6 +30,11 @@ module RamlPoliglota
         ((@is_interface.nil?) ? false : is_interface)
       end
 
+      def find_collection_model_attribute
+        return if @attributes.nil?
+        @attributes.select { |attribute| attribute.name == @collection_model_key }.first
+      end
+
     end
 
   end

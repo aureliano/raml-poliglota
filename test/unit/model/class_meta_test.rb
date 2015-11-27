@@ -99,5 +99,34 @@ class ClassMetaTest < Test::Unit::TestCase
     c.is_interface = true
     assert_true c.is_interface?
   end
-  
+
+  def test_find_collection_model_attribute
+    clazz = ClassMeta.new do |c|
+      c.add_attribute(AttributeMeta.new do |a|
+        a.name = 'id'
+        a.type = 'integer'
+      end)
+
+      c.add_attribute(AttributeMeta.new do |a|
+        a.name = 'entities'
+        a.type = 'array'
+        a.generic_type = 'FrodoBaggins'
+
+        c.collection_model_key = a.name
+      end)
+    end
+
+    attribute = clazz.find_collection_model_attribute
+    assert_equal 'entities', attribute.name
+    assert_equal 'array', attribute.type
+    assert_equal 'FrodoBaggins', attribute.generic_type
+
+    clazz.attributes.delete(AttributeMeta.new { |a| a.name = 'entities' })
+    assert_nil clazz.find_collection_model_attribute
+
+    clazz.attributes.clear
+    clazz.attributes.delete_if { |a| a.name = 'entities' }
+    assert_nil clazz.find_collection_model_attribute
+  end
+
 end
