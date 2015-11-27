@@ -1,8 +1,10 @@
+require File.expand_path '../string_helper.rb', __FILE__
+
 module RamlPoliglota
   module Helper
     module CodeBuilder
 
-      include String
+      include RamlPoliglota::Helper::Text
 
       TAB_SIZE = 2
 

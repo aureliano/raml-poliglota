@@ -1,10 +1,10 @@
 module RamlPoliglota
   module Helper
-    module String
+    module Text
 
       def string_empty?(value)
         unless value.nil?
-          raise "#{value} (#{value.class}) is not a String." if value.instance_of?(String)
+          raise "#{value} (#{value.class}) is not a String." unless value.instance_of?(String)
         end
         
         (value.nil? || value.empty?)

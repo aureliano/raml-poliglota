@@ -5,7 +5,7 @@ module RamlPoliglota
 
         class JavaModelBuilder
 
-          include RamlPoliglota::Helper::String
+          include RamlPoliglota::Helper::Text
           include RamlPoliglota::Helper::JavaCodeBuilder
 
           def initialize

@@ -7,7 +7,7 @@ module RamlPoliglota
 
         class JavaBuilder < CodeBuilder
 
-          include Helper::String
+          include Helper::Text
 
           def build_model(hash)
             JavaModelBuilder.new.build hash

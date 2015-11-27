@@ -4,7 +4,7 @@ require File.expand_path '../../../../lib/helper/string_helper.rb', __FILE__
 
 class StringHelperTest < Test::Unit::TestCase
 
-  include RamlPoliglota::Helper::String
+  include RamlPoliglota::Helper::Text
   
   def test_string_empty?
     assert_true(string_empty? nil)

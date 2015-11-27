@@ -3,7 +3,7 @@ module RamlPoliglota
     
     class InputValidation
 
-      include RamlPoliglota::Helper::String
+      include RamlPoliglota::Helper::Text
       include RamlPoliglota::Support
 
       def validate_inputs(execution)

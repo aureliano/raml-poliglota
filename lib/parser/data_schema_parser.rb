@@ -4,7 +4,7 @@ module RamlPoliglota
     class DataSchemaParser
 
       include RamlPoliglota::Model
-      include RamlPoliglota::Helper::String
+      include RamlPoliglota::Helper::Text
 
       def initialize
         yield self if block_given?
