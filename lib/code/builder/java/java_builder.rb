@@ -9,8 +9,8 @@ module RamlPoliglota
 
           include Helper::String
 
-          def initialize
-            @logger = AppLogger.create_logger self
+          def build_model(hash)
+            JavaModelBuilder.new.build hash
           end
 
           def build_imodel(namespace)
@@ -19,10 +19,6 @@ module RamlPoliglota
 
           def build_icollection_model(namespace)
             JavaInterfaceCollectionModelBuilder.new.build namespace
-          end
-
-          def build_model(hash)
-            JavaModelBuilder.new.build hash
           end
           
         end

@@ -13,18 +13,16 @@ module RamlPoliglota
           end
         end
 
-        attr_reader :builder
-
         def build_imodel(namespace)
-          @builder.build_imodel namespace
+          raise 'Method not implemented.'
         end
 
         def build_icollection_model(namespace)
-          @builder.build_icollection_model namespace
+          raise 'Method not implemented.'
         end
 
         def build_model(hash)
-          @builder.build_model hash
+          raise 'Method not implemented.'
         end
 
       end
