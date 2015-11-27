@@ -14,9 +14,13 @@ class JavaModelBuilderTest < Test::Unit::TestCase
     builder = JavaModelBuilder.new
     clazz = CLASS_META_FACTORY[:model][:bilbo_baggins][:object].dup
     clazz.add_interface 'IModel'
+    clazz.methods.clear
+
+    hash = Hash.new
+    hash['class'] = clazz
 
     expected = CLASS_META_FACTORY[:model][:bilbo_baggins][:text]
-    actual = builder.build(clazz)
+    actual = builder.build(hash)
     assert_equal expected, actual
   end
 
