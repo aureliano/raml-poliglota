@@ -120,7 +120,7 @@ module RamlPoliglota
 
             MethodMeta.new do |method|
               @logger.debug "Create method implementation to getSize()"
-              @logger.warn "Could not find size attribute at #{clazz.name} class." if size.nil?
+              @logger.warn "Could not find size attribute at #{clazz.cannonical_name} class." if size.nil?
 
               method.visibility = 'public'
               method.return_type = 'integer'
