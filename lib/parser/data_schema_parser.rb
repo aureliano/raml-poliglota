@@ -32,6 +32,7 @@ module RamlPoliglota
               a.name = key
               a.type = value['type']
               a.visibility = 'private'
+              a.generic_type = value['items']['$ref'] unless value['items'].nil?
             end)
           end
 

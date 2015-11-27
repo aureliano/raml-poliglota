@@ -34,6 +34,7 @@ module RamlPoliglota
         unless method.parameters.nil?
           params = method.parameters.collect do |p|
             type = js_to_java_type p.type
+            type = "#{type}<#{js_to_java_type p.generic_type}>" unless p.generic_type.nil?
             "#{type} #{p.name}"
           end.join(", ")
           text << write_code(params, 0)
