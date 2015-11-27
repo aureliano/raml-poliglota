@@ -54,8 +54,13 @@ module RamlPoliglota
               clazz.add_interface 'IModel'
             else
               clazz.add_interface 'ICollectionModel<IModel>'
-              clazz.add_method _create_get_size clazz
-              clazz.add_method _create_get_elements attribute
+              get_size = _create_get_size clazz
+              clazz.methods.delete get_size
+              clazz.add_method get_size
+
+              get_elements = _create_get_elements attribute
+              clazz.methods.delete get_elements
+              clazz.add_method get_elements
             end
           end
 
