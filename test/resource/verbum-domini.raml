@@ -29,7 +29,7 @@ schemas:
       }
   - bibles: |
       {  "$schema": "http://json-schema.org/draft-03/schema",
-         "type": "object",
+         "type": "collection",
          "description": "Available Holy Bible collection.",
          "properties": {
            "size":  { "type": "integer", "required": true },
@@ -63,7 +63,7 @@ schemas:
       }
   - books: |
       {  "$schema": "http://json-schema.org/draft-03/schema",
-         "type": "object",
+         "type": "collection",
          "description": "Available books within the Holy Bible.",
          "properties": {
            "size":  { "type": "integer", "required": true },
@@ -97,7 +97,7 @@ schemas:
       }
   - chapters: |
       {  "$schema": "http://json-schema.org/draft-03/schema",
-         "type": "object",
+         "type": "collection",
          "description": "Available chapters of a book.",
          "properties": {
            "size":  { "type": "integer", "required": true },
@@ -140,7 +140,7 @@ schemas:
       }
   - verses: |
       {  "$schema": "http://json-schema.org/draft-03/schema",
-         "type": "object",
+         "type": "collection",
          "description": "Available verses of a chapter.",
          "properties": {
            "size":  { "type": "integer", "required": true },

@@ -50,7 +50,7 @@ module RamlPoliglota
             a.type = value['type']
             a.visibility = 'private'
             
-            unless value['items'].nil?
+            if hash['type'] == 'collection' && !value['items'].nil?
               a.generic_type = value['items']['$ref']
               c.collection_model_key = a.name
             end
