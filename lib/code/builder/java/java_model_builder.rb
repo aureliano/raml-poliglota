@@ -52,7 +52,7 @@ module RamlPoliglota
             if attribute.nil?
               clazz.add_interface 'IModel'
             else
-              clazz.add_interface 'ICollectionModel'
+              clazz.add_interface 'ICollectionModel<IModel>'
               clazz.add_method _create_get_size clazz
               clazz.add_method _create_get_elements attribute
             end
