@@ -40,6 +40,13 @@ module RamlPoliglota
         @attributes.select { |attribute| attribute.name == @collection_model_key }.first
       end
 
+      def cannonical_name
+        return if (@name.nil? || @name.empty?)
+
+        text = "#{@namespace.to_s}.#{@name.to_s}"
+        text.sub /^\./, ''
+      end
+
     end
 
   end

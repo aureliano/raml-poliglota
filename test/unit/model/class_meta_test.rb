@@ -140,4 +140,26 @@ class ClassMetaTest < Test::Unit::TestCase
     assert_nil clazz.find_collection_model_attribute
   end
 
+  def test_cannonical_name
+    clazz = ClassMeta.new do |c|
+      c.namespace = 'br.mg.gv'
+      c.name = 'Smeagol'
+    end
+
+    assert_equal 'br.mg.gv.Smeagol', clazz.cannonical_name
+    
+    clazz.namespace = nil
+    assert_equal 'Smeagol', clazz.cannonical_name
+    
+    clazz.namespace = ''
+    assert_equal 'Smeagol', clazz.cannonical_name
+
+    clazz.namespace = 'br.mg.gv'
+    clazz.name = nil
+    assert_equal nil, clazz.cannonical_name
+
+    clazz.name = ''
+    assert_equal nil, clazz.cannonical_name
+  end
+
 end
