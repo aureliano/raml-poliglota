@@ -6,8 +6,8 @@ module RamlPoliglota
 
         include Support
 
-        def initialize(language)
-          @builder = case language
+        def self.create_code_builder(language)
+          case language
             when SUPPORTED_PROGRAMMING_LANGUAGES[:java] then Java::JavaBuilder.new
             else raise "Unsupported programming language #{language.name}."
           end

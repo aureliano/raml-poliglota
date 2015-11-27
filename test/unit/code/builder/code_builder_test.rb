@@ -10,15 +10,15 @@ class CodeBuilderTest < Test::Unit::TestCase
   include RamlPoliglota::Code::Builder
   include RamlPoliglota::Code::Builder::Java
 
-  def test_initialization
-    assert_raise(ArgumentError) { CodeBuilder.new }
+  def test_create_code_builder
+    assert_raise(ArgumentError) { CodeBuilder.create_code_builder }
 
-    code_builder = CodeBuilder.new SUPPORTED_PROGRAMMING_LANGUAGES[:java]
-    assert_true code_builder.builder.instance_of? JavaBuilder
+    code_builder = CodeBuilder.create_code_builder SUPPORTED_PROGRAMMING_LANGUAGES[:java]
+    assert_true code_builder.instance_of? JavaBuilder
   end
 
   def test_build_imodel
-    builder = CodeBuilder.new SUPPORTED_PROGRAMMING_LANGUAGES[:java]
+    builder = CodeBuilder.create_code_builder SUPPORTED_PROGRAMMING_LANGUAGES[:java]
     clazz = CLASS_META_FACTORY[:imodel][:object].dup
 
     expected = CLASS_META_FACTORY[:imodel][:text]
@@ -28,7 +28,7 @@ class CodeBuilderTest < Test::Unit::TestCase
   end
 
   def test_build_icollection_model
-    builder = CodeBuilder.new SUPPORTED_PROGRAMMING_LANGUAGES[:java]
+    builder = CodeBuilder.create_code_builder SUPPORTED_PROGRAMMING_LANGUAGES[:java]
     clazz = CLASS_META_FACTORY[:icollection_model][:object].dup
 
     expected = CLASS_META_FACTORY[:icollection_model][:text]
@@ -38,7 +38,7 @@ class CodeBuilderTest < Test::Unit::TestCase
   end
 
   def test_build_model
-    builder = CodeBuilder.new SUPPORTED_PROGRAMMING_LANGUAGES[:java]
+    builder = CodeBuilder.create_code_builder SUPPORTED_PROGRAMMING_LANGUAGES[:java]
     
     clazz = CLASS_META_FACTORY[:model][:bilbo_baggins][:object].dup
     clazz.methods.clear

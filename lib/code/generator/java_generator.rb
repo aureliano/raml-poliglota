@@ -15,7 +15,7 @@ module RamlPoliglota
           @logger = AppLogger.create_logger self
           @language = SUPPORTED_PROGRAMMING_LANGUAGES[:java]
 
-          @builder = CodeBuilder.new @language
+          @builder = CodeBuilder.create_code_builder @language
         end
 
         def generate(raml)
