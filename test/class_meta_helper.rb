@@ -177,7 +177,7 @@ package br.mg.gv;
  *
  * A Java Bean class.
  */
-public class #{name} {
+public class #{name} implements IModel {
 
   private Integer id;
   protected String firstName;

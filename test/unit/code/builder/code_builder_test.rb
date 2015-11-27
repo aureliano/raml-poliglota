@@ -19,7 +19,7 @@ class CodeBuilderTest < Test::Unit::TestCase
 
   def test_build_imodel
     builder = CodeBuilder.new SUPPORTED_PROGRAMMING_LANGUAGES[:java]
-    clazz = CLASS_META_FACTORY[:imodel][:object]
+    clazz = CLASS_META_FACTORY[:imodel][:object].dup
 
     expected = CLASS_META_FACTORY[:imodel][:text]
     actual = builder.build_imodel clazz.namespace
@@ -29,7 +29,7 @@ class CodeBuilderTest < Test::Unit::TestCase
 
   def test_build_icollection_model
     builder = CodeBuilder.new SUPPORTED_PROGRAMMING_LANGUAGES[:java]
-    clazz = CLASS_META_FACTORY[:icollection_model][:object]
+    clazz = CLASS_META_FACTORY[:icollection_model][:object].dup
 
     expected = CLASS_META_FACTORY[:icollection_model][:text]
     actual = builder.build_icollection_model clazz.namespace
@@ -40,7 +40,7 @@ class CodeBuilderTest < Test::Unit::TestCase
   def test_build_model
     builder = CodeBuilder.new SUPPORTED_PROGRAMMING_LANGUAGES[:java]
     
-    clazz = CLASS_META_FACTORY[:model][:bilbo_baggins][:object]
+    clazz = CLASS_META_FACTORY[:model][:bilbo_baggins][:object].dup
     clazz.methods.clear
     hash = Hash.new
     hash['class'] = clazz

@@ -85,8 +85,9 @@ module RamlPoliglota
       def append_class_definition(clazz, target)
         definition = ((clazz.is_interface?) ? 'interface' : 'class')
         generify = "<#{clazz.generics}>" unless clazz.generics.nil?
+        implmentation = " implements #{clazz.interfaces.join(', ')}" unless (clazz.interfaces.nil? || clazz.interfaces.empty?)
 
-        target << write_code("public #{definition} #{clazz.name}#{generify} {", 0)
+        target << write_code("public #{definition} #{clazz.name}#{generify}#{implmentation} {", 0)
         target << "\n\n"
       end
 

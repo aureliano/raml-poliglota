@@ -11,7 +11,7 @@ class JavaBuilderTest < Test::Unit::TestCase
   def test_build_model
     builder = JavaBuilder.new
     
-    clazz = CLASS_META_FACTORY[:model][:bilbo_baggins][:object]
+    clazz = CLASS_META_FACTORY[:model][:bilbo_baggins][:object].dup
     clazz.methods.clear
     hash = Hash.new
     hash['class'] = clazz
@@ -24,7 +24,7 @@ class JavaBuilderTest < Test::Unit::TestCase
 
   def test_build_imodel
     builder = JavaBuilder.new
-    clazz = CLASS_META_FACTORY[:imodel][:object]
+    clazz = CLASS_META_FACTORY[:imodel][:object].dup
 
     expected = CLASS_META_FACTORY[:imodel][:text]
     actual = builder.build_imodel clazz.namespace
@@ -34,7 +34,7 @@ class JavaBuilderTest < Test::Unit::TestCase
 
   def test_build_icollection_model
     builder = JavaBuilder.new
-    clazz = CLASS_META_FACTORY[:icollection_model][:object]
+    clazz = CLASS_META_FACTORY[:icollection_model][:object].dup
 
     expected = CLASS_META_FACTORY[:icollection_model][:text]
     actual = builder.build_icollection_model clazz.namespace

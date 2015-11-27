@@ -12,7 +12,8 @@ class JavaModelBuilderTest < Test::Unit::TestCase
 
   def test_build
     builder = JavaModelBuilder.new
-    clazz = CLASS_META_FACTORY[:model][:bilbo_baggins][:object]
+    clazz = CLASS_META_FACTORY[:model][:bilbo_baggins][:object].dup
+    clazz.add_interface 'IModel'
 
     expected = CLASS_META_FACTORY[:model][:bilbo_baggins][:text]
     actual = builder.build(clazz)

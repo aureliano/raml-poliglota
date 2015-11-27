@@ -65,7 +65,18 @@ module RamlPoliglota
               clazz.add_method _create_builder(clazz.name, attribute)
             end
 
+            clazz.attributes ||= []
             clazz.methods ||= []
+
+            attribute = clazz.find_collection_model_attribute
+            if attribute.nil?
+              clazz.add_interface 'IModel'
+            else
+              clazz.add_interface 'ICollectionModel'
+              clazz.add_method _create_get_size clazz
+              clazz.add_method _create_get_elements attribute
+            end
+
             JavaModelBuilder.new.build clazz
           end
 
@@ -123,6 +134,32 @@ module RamlPoliglota
               method.generic_return_type = up_first_letter attribute.generic_type
               method.name = "fetch#{up_first_letter attribute.name}"
               method.body = 'throw new RuntimeException("Method not implemented.");'
+            end
+          end
+          
+          def _create_get_size(clazz)
+            size = clazz.attributes.select { |a| a.name == 'size' }.first
+
+            MethodMeta.new do |method|
+              @logger.debug "Create method implementation to getSize()"
+              @logger.warn "Could not find size attribute to use on implementation of getSize method." if size.nil?
+
+              method.visibility = 'public'
+              method.return_type = 'integer'
+              method.name = 'getSize'
+              method.body = ((size.nil?) ? 'throw new RuntimeException("No such attribute \"size\" found.");' : "return this.size;")
+            end
+          end
+
+          def _create_get_elements(attribute)
+            MethodMeta.new do |method|
+              @logger.debug "Create method implementation to getElements()"
+
+              method.visibility = 'public'
+              method.return_type = attribute.type
+              method.generic_return_type = up_first_letter attribute.generic_type
+              method.name = 'getElements'
+              method.body = "return this.#{attribute.name};"
             end
           end
           
