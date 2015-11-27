@@ -26,6 +26,11 @@ module RamlPoliglota
         @methods << method
       end
 
+      def add_interface(interface)
+        @interfaces ||= []
+        @interfaces << interface
+      end
+
       def is_interface?
         ((@is_interface.nil?) ? false : is_interface)
       end

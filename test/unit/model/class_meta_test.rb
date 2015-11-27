@@ -88,6 +88,17 @@ class ClassMetaTest < Test::Unit::TestCase
     assert_equal 'method_2', c.methods[1].name
   end
 
+  def test_add_interface
+    c = ClassMeta.new
+
+    c.add_interface 'Interface1'
+    c.add_interface 'Class2'
+
+    assert_equal 2, c.interfaces.size
+    assert_equal 'Interface1', c.interfaces.first
+    assert_equal 'Class2', c.interfaces.last
+  end
+
   def test_is_interface?
     c = ClassMeta.new
 
