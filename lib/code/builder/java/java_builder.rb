@@ -20,6 +20,10 @@ module RamlPoliglota
           def build_icollection_model(namespace)
             JavaInterfaceCollectionModelBuilder.new.build namespace
           end
+
+          def build_iservice_parameters(namespace)
+            raise 'Method not implemented.'
+          end
           
         end
       
