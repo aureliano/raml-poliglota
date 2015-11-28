@@ -42,9 +42,4 @@ class JavaBuilderTest < Test::Unit::TestCase
     assert_equal expected, actual
   end
 
-  def test_build_iservice_parameters
-    builder = JavaBuilder.new
-    assert_raise(RuntimeError) { builder.build_iservice_parameters '' }
-  end
-
 end
