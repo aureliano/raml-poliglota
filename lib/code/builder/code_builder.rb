@@ -25,6 +25,10 @@ module RamlPoliglota
           raise 'Method not implemented.'
         end
 
+        def build_iservice_parameters(namespace)
+          raise 'Method not implemented.'
+        end
+
       end
 
     end

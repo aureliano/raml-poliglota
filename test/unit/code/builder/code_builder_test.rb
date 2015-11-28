@@ -51,4 +51,9 @@ class CodeBuilderTest < Test::Unit::TestCase
     assert_equal expected, actual
   end
 
+  def test_build_iservice_parameters
+    builder = CodeBuilder.create_code_builder SUPPORTED_PROGRAMMING_LANGUAGES[:java]
+    assert_raise(RuntimeError) { builder.build_iservice_parameters '' }
+  end
+
 end
